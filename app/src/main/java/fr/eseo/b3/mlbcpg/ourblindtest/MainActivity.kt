@@ -1,5 +1,6 @@
 package fr.eseo.b3.mlbcpg.ourblindtest
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,7 +11,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.theme.OurBlindTestTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,6 +24,8 @@ class MainActivity : ComponentActivity() {
             OurBlindTestTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
+
+
                         name = "Android",
                         modifier = Modifier.padding(innerPadding)
                     )
@@ -32,6 +37,9 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+
+    val application = LocalContext.current.applicationContext as Application
+    val repository = OurBlindTestRepositoriesRoomImp(application)
     Text(
         text = "Hello $name!",
         modifier = modifier
