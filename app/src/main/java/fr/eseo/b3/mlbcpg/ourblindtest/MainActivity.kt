@@ -40,6 +40,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
     val application = LocalContext.current.applicationContext as Application
     val repository = OurBlindTestRepositoriesRoomImp(application)
+
     Text(
         text = "Hello $name!",
         modifier = modifier
