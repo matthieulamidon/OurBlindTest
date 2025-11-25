@@ -2,13 +2,16 @@ package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -18,6 +21,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,7 +52,8 @@ fun QuizScreen(onFinish: () -> Unit) {
                 Column(modifier = Modifier.padding(innerPadding)) {
                     QuizScreenContent(
                         modifier = Modifier.fillMaxWidth(),
-                        onFinish = onFinish
+                        onFinish = onFinish,
+                        answers = listOf("Réponse A", "Réponse B", "Réponse C", "Réponse D")
                     )
                 }
             }
@@ -58,30 +65,70 @@ fun QuizScreen(onFinish: () -> Unit) {
 private fun QuizScreenContent(
     modifier: Modifier,
     viewModel: QuizViewModel = viewModel(),
+    answers: List<String>,
     onFinish: () -> Unit
 ) {
     val question by viewModel.currentQuestion
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = question, fontSize = 22.sp)
-        Spacer(Modifier.height(24.dp))
 
-        Button(onClick = {
-            viewModel.answerCorrect()
-            onFinish()
-        }) {
-            Text("Répondre : Correct ✔")
+        // Zone Timer + Animation
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Row(modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
+                horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("Animation ici", fontSize = 18.sp)
+                Text("Timer ici", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            }
         }
 
-        Spacer(Modifier.height(8.dp))
+        // Question
+        Text(
+            text = question,
+            fontSize = 30.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(horizontal = 12.dp)
+        )
 
-        Button(onClick = onFinish) {
-            Text("Répondre : Incorrect ❌")
+        Spacer(Modifier.height(40.dp))
+
+        // Réponses
+        answers.forEach { answer ->
+            AnswerButton(
+                text = answer,
+                onClick = {
+                    viewModel.answerCorrect()
+                    onFinish()
+                }
+            )
+            Spacer(Modifier.height(20.dp))
         }
+    }
+}
+
+
+@Composable
+fun AnswerButton(text: String, onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(80.dp)
+    ) {
+        Text(text, fontSize = 24.sp)
     }
 }
 
@@ -89,14 +136,20 @@ private fun QuizScreenContent(
 @Composable
 fun QuizScreenPreview() {
     OurBlindTestTheme {
-        val fakeViewModel = QuizViewModel() // ok en preview si ton VM a un constructeur sans param
-
+        val fakeViewModel = QuizViewModel()
+        OurBlindTestAppBar(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(MaterialTheme.colorScheme.primary)
+        )
         QuizScreenContent(
             modifier = Modifier.fillMaxWidth(),
             viewModel = fakeViewModel,
-            onFinish = {}
+            onFinish = {},
+            answers = listOf("Réponse A", "Réponse B", "Réponse C", "Réponse D")
         )
     }
 }
+
 
 

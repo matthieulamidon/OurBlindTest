@@ -11,7 +11,7 @@ class QuizViewModel : ViewModel() {
     private val _score = mutableStateOf(0)
     val score: State<Int> = _score
 
-    private val _currentQuestion = mutableStateOf("🎵 AAAYAYAYAAAA BUSSHKARAAA ?")
+    private val _currentQuestion = mutableStateOf("Quelle est la réponse à cette question ?")
     val currentQuestion: State<String> = _currentQuestion
 
     fun answerCorrect() {

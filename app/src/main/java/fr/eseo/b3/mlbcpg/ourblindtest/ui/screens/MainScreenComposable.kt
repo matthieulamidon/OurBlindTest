@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -29,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,13 +74,18 @@ fun MainScreen(onStartQuiz: () -> Unit) {
 private fun MainScreenContent(
     modifier: Modifier,
     onStartQuiz: () -> Unit
-){
+) {
     var pseudo by remember { mutableStateOf("") }
 
+    // en dur pour l'instant
+    val scores = listOf(
+        "MOI" to 8,
+        "ENCORE MOI" to 12,
+        "PAS MOI" to 5
+    )
+
     Card(
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
-        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         modifier = modifier.padding(16.dp)
     ) {
         Column(
@@ -86,12 +93,17 @@ private fun MainScreenContent(
                 .fillMaxSize()
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
+            verticalArrangement = Arrangement.Top
         ) {
+            ScoreTable(scores)
+
+            Spacer(Modifier.height(60.dp))
+            // Titre
             Text("Blind Test 🎵", fontSize = 28.sp)
 
             Spacer(Modifier.height(16.dp))
 
+            // Pseudo
             TextField(
                 value = pseudo,
                 onValueChange = { pseudo = it },
@@ -100,8 +112,51 @@ private fun MainScreenContent(
 
             Spacer(Modifier.height(16.dp))
 
-            Button(onClick = onStartQuiz) {
+            // Bouton Start
+            Button(
+                onClick = onStartQuiz,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text("Commencer le quiz")
+            }
+
+            Spacer(Modifier.height(32.dp))
+
+            // Settings
+            Button(
+                onClick = {},
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Settings")
+            }
+
+            Spacer(Modifier.height(40.dp))
+
+            // Tableau des scores
+            Text(
+                "Tableau des scores",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+@Composable
+fun ScoreTable(scores: List<Pair<String, Int>>) {
+    Column(
+        modifier = Modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.Start
+    ) {
+        scores.forEach { (pseudo, score) ->
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(pseudo, fontSize = 18.sp)
+                Text("$score pts", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             }
         }
     }
