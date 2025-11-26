@@ -42,7 +42,7 @@ fun AppNavigation() {
             QuizScreen(
                 onFinish = {
                     navController.navigate("results")
-                }
+                }, InGameVM
             )
         }
         composable("results") {

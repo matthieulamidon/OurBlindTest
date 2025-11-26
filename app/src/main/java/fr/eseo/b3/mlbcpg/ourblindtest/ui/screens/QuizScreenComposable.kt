@@ -1,5 +1,6 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,11 +30,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.theme.OurBlindTestTheme
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.QuizViewModel
 
 @Composable
-fun QuizScreen(onFinish: () -> Unit) {
+fun QuizScreen(onFinish: () -> Unit, InGameVM : InGameViewModel)
+    {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -53,7 +57,8 @@ fun QuizScreen(onFinish: () -> Unit) {
                     QuizScreenContent(
                         modifier = Modifier.fillMaxWidth(),
                         onFinish = onFinish,
-                        answers = listOf("Réponse A", "Réponse B", "Réponse C", "Réponse D")
+                        answers = listOf("Réponse A", "Réponse B", "Réponse C", "Réponse D"),
+                        InGameVM = InGameVM
                     )
                 }
             }
@@ -66,7 +71,8 @@ private fun QuizScreenContent(
     modifier: Modifier,
     viewModel: QuizViewModel = viewModel(),
     answers: List<String>,
-    onFinish: () -> Unit
+    onFinish: () -> Unit,
+    InGameVM: InGameViewModel
 ) {
     val question by viewModel.currentQuestion
 
@@ -132,11 +138,13 @@ fun AnswerButton(text: String, onClick: () -> Unit) {
     }
 }
 
+@SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
 fun QuizScreenPreview() {
     OurBlindTestTheme {
         val fakeViewModel = QuizViewModel()
+        val fakeViewModelInGame = InGameViewModel(InGameRepositoryListImpl())
         OurBlindTestAppBar(
             modifier = Modifier
                 .fillMaxWidth()
@@ -146,7 +154,8 @@ fun QuizScreenPreview() {
             modifier = Modifier.fillMaxWidth(),
             viewModel = fakeViewModel,
             onFinish = {},
-            answers = listOf("Réponse A", "Réponse B", "Réponse C", "Réponse D")
+            answers = listOf("Réponse A", "Réponse B", "Réponse C", "Réponse D"),
+            InGameVM = fakeViewModelInGame
         )
     }
 }
