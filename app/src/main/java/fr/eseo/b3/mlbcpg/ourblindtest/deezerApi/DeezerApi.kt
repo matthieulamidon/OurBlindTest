@@ -11,7 +11,8 @@ data class Track(
     val title: String,
     val artist: String,
     val album: String,
-    val preview: String
+    val preview: String,
+    val albumArtUrl: String
 )
 
 object DeezerApi {
@@ -30,9 +31,11 @@ object DeezerApi {
                 val trackJson = items.getJSONObject(0)
                 val title = trackJson.getString("title")
                 val artist = trackJson.getJSONObject("artist").getString("name")
-                val album = trackJson.getJSONObject("album").getString("title")
+                val albumObject = trackJson.getJSONObject("album")
+                val album = albumObject.getString("title")
+                val albumArtUrl = albumObject.getString("cover_medium")
                 val preview = trackJson.getString("preview")
-                return@withContext Track(title, artist, album, preview)
+                return@withContext Track(title, artist, album, preview, albumArtUrl)
             }
         }
         null
