@@ -11,13 +11,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class InGameViewModel(val repository: InGameRepository): ViewModel() {
-    private val _pseudo = MutableStateFlow<String>("")
-    var pseudo : StateFlow<String> = _pseudo.asStateFlow()
+    private val _pseudo = MutableStateFlow("")
+    val pseudo : StateFlow<String> = _pseudo.asStateFlow()
 
-    private val _score = MutableStateFlow<Int>(0)
-    var score : StateFlow<Int> = _score.asStateFlow()
+    private val _score = MutableStateFlow(0)
+    val score : StateFlow<Int> = _score.asStateFlow()
 
-    private val _idQuestion = MutableStateFlow<Int>(0)
+    private val _idQuestion = MutableStateFlow(0)
     val idQuestion : StateFlow<Int> = _idQuestion.asStateFlow()
 
     private val _question = MutableStateFlow<QuestionBlindTest?>(null)
@@ -63,17 +63,25 @@ class InGameViewModel(val repository: InGameRepository): ViewModel() {
     fun setPseudo(pseudo: String) {
         viewModelScope.launch {
             repository.setPseudo(pseudo)
+            _pseudo.value = pseudo
         }
     }
     fun addScore(scoreVal: Int) {
         viewModelScope.launch {
             repository.addScore(scoreVal)
-            score = MutableStateFlow<Int>(repository.getScore())
+            _score.value = repository.getScore()
         }
     }
     fun setSetting() {
         viewModelScope.launch {
             repository.setSetting(setting.value)
+        }
+    }
+
+    fun resetGame() {
+        viewModelScope.launch {
+            repository.resetGame()
+            reload()
         }
     }
 

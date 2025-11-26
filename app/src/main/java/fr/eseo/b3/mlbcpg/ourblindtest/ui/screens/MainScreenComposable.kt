@@ -56,7 +56,7 @@ import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModelFactory
 import java.time.LocalDateTime
 
 @Composable
-fun MainScreen(onStartQuiz: () -> Unit,
+fun MainScreen(onStartQuiz: () -> Unit, onMusicPlayer: () -> Unit,
    InGameVm: InGameViewModel,
    OurBlindTestVm : OurBlindTestViewModel) {
     Surface(
@@ -78,6 +78,7 @@ fun MainScreen(onStartQuiz: () -> Unit,
                     MainScreenContent(
                         modifier = Modifier.fillMaxWidth(),
                         onStartQuiz = onStartQuiz,
+                        onMusicPlayer = onMusicPlayer,
                         InGameVm =  InGameVm,
                         OurBlindTestVm = OurBlindTestVm
                     )
@@ -91,6 +92,7 @@ fun MainScreen(onStartQuiz: () -> Unit,
 private fun MainScreenContent(
     modifier: Modifier,
     onStartQuiz: () -> Unit,
+    onMusicPlayer: () -> Unit,
     InGameVm: InGameViewModel,
     OurBlindTestVm: OurBlindTestViewModel
 ) {
@@ -138,10 +140,23 @@ private fun MainScreenContent(
 
             // Bouton Start
             Button(
-                onClick = onStartQuiz,
+                onClick = { 
+                    InGameVm.setPseudo(pseudo)
+                    onStartQuiz()
+                },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Commencer le quiz")
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            // Bouton Music Player
+            Button(
+                onClick = { onMusicPlayer() },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Lecteur de musique")
             }
 
             Spacer(Modifier.height(32.dp))
@@ -203,6 +218,7 @@ fun HomeScreenPreview() {
     OurBlindTestTheme {
         MainScreen(
             onStartQuiz = {},
+            onMusicPlayer = {},
             InGameVm = fakeViewModelInGame,
             OurBlindTestVm = fakeViewModel
         )

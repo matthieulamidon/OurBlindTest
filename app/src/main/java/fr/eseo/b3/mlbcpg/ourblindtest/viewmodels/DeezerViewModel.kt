@@ -4,20 +4,25 @@ import android.media.MediaPlayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import fr.eseo.b3.mlbcpg.ourblindtest.deezerApi.DeezerApi
+import fr.eseo.b3.mlbcpg.ourblindtest.deezerApi.Track
 import kotlinx.coroutines.launch
 
 class DeezerViewModel : ViewModel() {
 
     private var mediaPlayer: MediaPlayer? = null
 
-    //query nom de la musique voulu
-    fun searchTrack(query: String, onPreviewReady: (String?) -> Unit) {
+    fun searchTrack(songName: String, author: String? = null, onTrackReady: (Track?) -> Unit) {
         viewModelScope.launch {
-            val url = DeezerApi.searchTrack(query)
-            if (url != null) {
-                playPreview(url)
+            val query = if (author != null && author.isNotBlank()) {
+                "track:\"$songName\" artist:\"$author\""
+            } else {
+                songName
             }
-            onPreviewReady(url)
+            val track = DeezerApi.searchTrack(query)
+            if (track != null) {
+                playPreview(track.preview)
+            }
+            onTrackReady(track)
         }
     }
 

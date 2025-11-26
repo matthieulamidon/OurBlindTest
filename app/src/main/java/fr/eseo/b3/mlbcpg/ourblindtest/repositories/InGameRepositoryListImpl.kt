@@ -79,4 +79,9 @@ class InGameRepositoryListImpl: InGameRepository {
         return setting
     }
 
+    override suspend fun resetGame() {
+        score = 0
+        currentQuestion = 0
+    }
+
 }
