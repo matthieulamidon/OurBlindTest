@@ -194,8 +194,8 @@ class FakeRepo : OurBlindTestRepository {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    val fakeViewModel = OurBlindTestViewModel(FakeRepo())
-    val fakeViewModelInGame = InGameViewModel(InGameRepositoryListImpl())
+    val fakeViewModel = OurBlindTestViewModel(repository = FakeRepo())
+    val fakeViewModelInGame = InGameViewModel(repository = InGameRepositoryListImpl())
 
     // Force l'init directe
     fakeViewModel.refreshScores()
