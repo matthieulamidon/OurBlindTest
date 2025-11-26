@@ -1,5 +1,6 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.repositories
 
+import fr.eseo.b3.mlbcpg.ourblindtest.ListOfQuestion.ListOfQuestion
 import fr.eseo.b3.mlbcpg.ourblindtest.model.QuestionBlindTest
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
 
@@ -23,10 +24,15 @@ class InGameRepositoryListImpl: InGameRepository {
     }
 
     override suspend fun generateListOfQuestion() {
-        val testQuestion : QuestionBlindTest = QuestionBlindTest("testa", "testa", "testa", "testa", "testa")
-        listOfQuestion.add(testQuestion)
-        val testQuestion2 : QuestionBlindTest = QuestionBlindTest("testb", "testb", "testb", "testb", "testb")
-        listOfQuestion.add(testQuestion2)
+        /*
+            val testQuestion : QuestionBlindTest = QuestionBlindTest("testa", "testa", "testa", "testa", "testa")
+            listOfQuestion.add(testQuestion)
+            val testQuestion2 : QuestionBlindTest = QuestionBlindTest("testb", "testb", "testb", "testb", "testb")
+                listOfQuestion.add(testQuestion2)
+        */
+
+        val generate = ListOfQuestion().generateQuestions(setting)
+        listOfQuestion = generate.toMutableList()
         currentQuestion = 0
         score = 0
     }
