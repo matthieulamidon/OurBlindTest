@@ -1,6 +1,7 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
 import android.R.attr.onClick
+import android.app.Application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +23,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -37,13 +40,21 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import fr.eseo.b3.mlbcpg.ourblindtest.R
+import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepository
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.theme.OurBlindTestTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.OurBlindTestAppBar
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModelFactory
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModel
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModelFactory
 import java.time.LocalDateTime
 
-
 @Composable
-fun MainScreen(onStartQuiz: () -> Unit) {
+fun MainScreen(onStartQuiz: () -> Unit,
+   viewModel: OurBlindTestViewModel) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -62,7 +73,8 @@ fun MainScreen(onStartQuiz: () -> Unit) {
                 Column(modifier = Modifier.padding(innerPadding)) {
                     MainScreenContent(
                         modifier = Modifier.fillMaxWidth(),
-                        onStartQuiz = onStartQuiz
+                        onStartQuiz = onStartQuiz,
+                        viewModel =  viewModel
                     )
                 }
             }
@@ -73,16 +85,13 @@ fun MainScreen(onStartQuiz: () -> Unit) {
 @Composable
 private fun MainScreenContent(
     modifier: Modifier,
-    onStartQuiz: () -> Unit
+    onStartQuiz: () -> Unit,
+    viewModel: OurBlindTestViewModel
 ) {
     var pseudo by remember { mutableStateOf("") }
 
-    // en dur pour l'instant
-    val scores = listOf(
-        "MOI" to 8,
-        "ENCORE MOI" to 12,
-        "PAS MOI" to 5
-    )
+    // récupération des scores via le viewModel
+    val scoreList by viewModel.scores.collectAsState()
 
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
@@ -95,9 +104,18 @@ private fun MainScreenContent(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
         ) {
-            ScoreTable(scores)
+            // Affichage du tableau des scores
+            Text(
+                "Tableau des scores",
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
 
-            Spacer(Modifier.height(60.dp))
+            Spacer(Modifier.height(16.dp))
+            ScoreTable(scoreList)
+
+            Spacer(Modifier.height(40.dp))
+
             // Titre
             Text("Blind Test 🎵", fontSize = 28.sp)
 
@@ -129,46 +147,60 @@ private fun MainScreenContent(
             ) {
                 Text("Settings")
             }
-
-            Spacer(Modifier.height(40.dp))
-
-            // Tableau des scores
-            Text(
-                "Tableau des scores",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
         }
     }
 }
 
 @Composable
-fun ScoreTable(scores: List<Pair<String, Int>>) {
+fun ScoreTable(scores: List<Score>) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.Start
     ) {
-        scores.forEach { (pseudo, score) ->
+        scores.forEach { score ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(pseudo, fontSize = 18.sp)
-                Text("$score pts", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                Text(score.name, fontSize = 18.sp)
+                Text("${score.score} pts", fontSize = 18.sp, fontWeight = FontWeight.Bold)
             }
         }
     }
 }
 
+class FakeRepo : OurBlindTestRepository {
+    private val fakeData = listOf(
+        Score(name = "Test", score = 12),
+        Score(name = "Preview", score = 5)
+    )
+
+    override suspend fun getAllScore() = fakeData
+
+    override suspend fun addOrUpdateScore(score: Score) {}
+    override suspend fun deleteScore(score: Score) {}
+    override suspend fun getScoreById(id: String) = null
+}
+
+@Suppress("UNCHECKED_CAST", "ViewModelConstructor")
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
+    val fakeViewModel = OurBlindTestViewModel(FakeRepo())
+
+    // Force l'init directe
+    fakeViewModel.refreshScores()
+
     OurBlindTestTheme {
-        MainScreen(onStartQuiz = {})
+        MainScreen(
+            onStartQuiz = {},
+            viewModel = fakeViewModel
+        )
     }
 }
+
 
  /*
 @Composable
