@@ -41,12 +41,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import fr.eseo.b3.mlbcpg.ourblindtest.R
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepository
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepository
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.theme.OurBlindTestTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.OurBlindTestAppBar
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModelFactory
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModel
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModelFactory
@@ -54,7 +56,8 @@ import java.time.LocalDateTime
 
 @Composable
 fun MainScreen(onStartQuiz: () -> Unit,
-   viewModel: OurBlindTestViewModel) {
+   InGameVm: InGameViewModel,
+   OurBlindTestVm : OurBlindTestViewModel) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -74,7 +77,8 @@ fun MainScreen(onStartQuiz: () -> Unit,
                     MainScreenContent(
                         modifier = Modifier.fillMaxWidth(),
                         onStartQuiz = onStartQuiz,
-                        viewModel =  viewModel
+                        InGameVm =  InGameVm,
+                        OurBlindTestVm = OurBlindTestVm
                     )
                 }
             }
@@ -86,12 +90,13 @@ fun MainScreen(onStartQuiz: () -> Unit,
 private fun MainScreenContent(
     modifier: Modifier,
     onStartQuiz: () -> Unit,
-    viewModel: OurBlindTestViewModel
+    InGameVm: InGameViewModel,
+    OurBlindTestVm: OurBlindTestViewModel
 ) {
     var pseudo by remember { mutableStateOf("") }
 
     // récupération des scores via le viewModel
-    val scoreList by viewModel.scores.collectAsState()
+    val scoreList by OurBlindTestVm.scores.collectAsState()
 
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
@@ -189,6 +194,7 @@ class FakeRepo : OurBlindTestRepository {
 @Composable
 fun HomeScreenPreview() {
     val fakeViewModel = OurBlindTestViewModel(FakeRepo())
+    val fakeViewModelInGame = InGameViewModel(InGameRepositoryListImpl())
 
     // Force l'init directe
     fakeViewModel.refreshScores()
@@ -196,7 +202,8 @@ fun HomeScreenPreview() {
     OurBlindTestTheme {
         MainScreen(
             onStartQuiz = {},
-            viewModel = fakeViewModel
+            InGameVm = fakeViewModelInGame,
+            OurBlindTestVm = fakeViewModel
         )
     }
 }

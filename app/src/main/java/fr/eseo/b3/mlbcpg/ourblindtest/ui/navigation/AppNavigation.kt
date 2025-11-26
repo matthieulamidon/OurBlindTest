@@ -7,11 +7,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.MainScreen
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.QuizScreen
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.ResultScreen
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModelFactory
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModel
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModelFactory
 
@@ -22,6 +25,9 @@ fun AppNavigation() {
     val ourBlindTestVM: OurBlindTestViewModel = viewModel(
         factory = OurBlindTestViewModelFactory(OurBlindTestRepositoryListImpl())
     )
+    val InGameVM: InGameViewModel = viewModel(
+        factory = InGameViewModelFactory(InGameRepositoryListImpl())
+    )
 
     NavHost(
         navController = navController,
@@ -30,7 +36,7 @@ fun AppNavigation() {
         composable("home") {
             MainScreen(onStartQuiz = {
                 navController.navigate("quiz")
-            },ourBlindTestVM)
+            },InGameVM, ourBlindTestVM)
         }
         composable("quiz") {
             QuizScreen(
