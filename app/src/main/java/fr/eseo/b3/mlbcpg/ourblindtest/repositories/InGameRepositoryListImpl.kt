@@ -16,6 +16,11 @@ class InGameRepositoryListImpl: InGameRepository {
     }
 
     override suspend fun getNextQuestion(): QuestionBlindTest {
+        if (listOfQuestion.isEmpty()) {
+            val testQuestion : QuestionBlindTest = QuestionBlindTest("testa", "testa", "testa", "testa", "testa")
+            listOfQuestion.add(testQuestion)
+            return listOfQuestion[0]
+        }
         return listOfQuestion[currentQuestion]
     }
 

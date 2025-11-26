@@ -1,6 +1,7 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
 import android.R.attr.onClick
+import android.annotation.SuppressLint
 import android.app.Application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
@@ -189,12 +190,12 @@ class FakeRepo : OurBlindTestRepository {
     override suspend fun getScoreById(id: String) = null
 }
 
-@Suppress("UNCHECKED_CAST", "ViewModelConstructor")
+@SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    val fakeViewModel = OurBlindTestViewModel(FakeRepo())
-    val fakeViewModelInGame = InGameViewModel(InGameRepositoryListImpl())
+    val fakeViewModel = OurBlindTestViewModel(repository = FakeRepo())
+    val fakeViewModelInGame = InGameViewModel(repository = InGameRepositoryListImpl())
 
     // Force l'init directe
     fakeViewModel.refreshScores()

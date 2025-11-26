@@ -1,5 +1,6 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -63,6 +64,7 @@ fun ResultScreen(
     }
 
 }
+@SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
 fun ResultScreenPreview() {
