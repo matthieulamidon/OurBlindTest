@@ -1,6 +1,8 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,13 +14,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pause
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -27,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.google.gson.Gson
@@ -47,10 +54,19 @@ fun MusicPlayerScreen(deezerViewModel: DeezerViewModel) {
     val isPlaying by deezerViewModel.isPlaying.collectAsState()
     val currentPosition by deezerViewModel.currentPosition.collectAsState()
     val duration by deezerViewModel.duration.collectAsState()
+    val dynamicColors by deezerViewModel.dynamicColors.collectAsState()
+
+    val backgroundColor by animateColorAsState(
+        targetValue = dynamicColors?.background ?: MaterialTheme.colorScheme.background, label = ""
+    )
+    val onBackgroundColor by animateColorAsState(
+        targetValue = dynamicColors?.onBackground ?: MaterialTheme.colorScheme.onBackground, label = ""
+    )
 
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(backgroundColor)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -58,6 +74,7 @@ fun MusicPlayerScreen(deezerViewModel: DeezerViewModel) {
         Text(
             text = "Entrez le nom d'une musique",
             style = MaterialTheme.typography.titleLarge,
+            color = onBackgroundColor,
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
@@ -66,13 +83,35 @@ fun MusicPlayerScreen(deezerViewModel: DeezerViewModel) {
                 value = songName,
                 onValueChange = { songName = it },
                 label = { Text("Nom de la musique") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = onBackgroundColor,
+                    unfocusedTextColor = onBackgroundColor,
+                    cursorColor = onBackgroundColor,
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    focusedIndicatorColor = onBackgroundColor,
+                    unfocusedIndicatorColor = onBackgroundColor.copy(alpha = 0.5f),
+                    focusedLabelColor = onBackgroundColor,
+                    unfocusedLabelColor = onBackgroundColor.copy(alpha = 0.7f)
+                )
             )
             OutlinedTextField(
                 value = authorName,
                 onValueChange = { authorName = it },
                 label = { Text("Nom de l'auteur (optionnel)") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = TextFieldDefaults.colors(
+                    focusedTextColor = onBackgroundColor,
+                    unfocusedTextColor = onBackgroundColor,
+                    cursorColor = onBackgroundColor,
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    focusedIndicatorColor = onBackgroundColor,
+                    unfocusedIndicatorColor = onBackgroundColor.copy(alpha = 0.5f),
+                    focusedLabelColor = onBackgroundColor,
+                    unfocusedLabelColor = onBackgroundColor.copy(alpha = 0.7f)
+                )
             )
         }
 
@@ -80,40 +119,54 @@ fun MusicPlayerScreen(deezerViewModel: DeezerViewModel) {
             modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterHorizontally)
         ) {
-            Button(onClick = {
-                searchStatus = "Recherche..."
-                deezerViewModel.searchTrack(songName, authorName) { foundTrack ->
-                    searchStatus = if (foundTrack != null) "Preview trouvée !" else "Preview non trouvée."
-                }
-            }) {
+            Button(
+                onClick = {
+                    searchStatus = "Recherche..."
+                    deezerViewModel.searchTrack(songName, authorName) { foundTrack ->
+                        searchStatus = if (foundTrack != null) "Preview trouvée !" else "Preview non trouvée."
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = onBackgroundColor,
+                    contentColor = backgroundColor
+                )
+            ) {
                 Text("Lire la musique")
             }
-            Button(onClick = {
-                searchStatus = "Recherche..."
-                val songsJson = ListOfQuestion.QUESTIONS_JSON_DATA
-                val gson = Gson()
-                val songListType = object : TypeToken<List<SongData>>() {}.type
-                val songs: List<SongData> = gson.fromJson(songsJson, songListType)
-                val randomSong = songs.random()
-                songName = randomSong.name
-                authorName = randomSong.author
-                deezerViewModel.searchTrack(randomSong.name, randomSong.author) { foundTrack ->
-                    searchStatus = if (foundTrack != null) "Preview trouvée !" else "Preview non trouvée."
-                }
-            }) {
+            Button(
+                onClick = {
+                    searchStatus = "Recherche..."
+                    val songsJson = ListOfQuestion.QUESTIONS_JSON_DATA
+                    val gson = Gson()
+                    val songListType = object : TypeToken<List<SongData>>() {}.type
+                    val songs: List<SongData> = gson.fromJson(songsJson, songListType)
+                    val randomSong = songs.random()
+                    songName = randomSong.name
+                    authorName = randomSong.author
+                    deezerViewModel.searchTrack(randomSong.name, randomSong.author) { foundTrack ->
+                        searchStatus = if (foundTrack != null) "Preview trouvée !" else "Preview non trouvée."
+                    }
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = onBackgroundColor,
+                    contentColor = backgroundColor
+                )
+            ) {
                 Text("Lecture aléatoire")
             }
         }
 
         if (searchStatus.isNotEmpty() && track == null) {
-            Text(searchStatus, modifier = Modifier.padding(top = 16.dp))
+            Text(searchStatus, color = onBackgroundColor, modifier = Modifier.padding(top = 16.dp))
         }
 
         track?.let {
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp)
+                    .padding(top = 16.dp),
+                colors = CardDefaults.cardColors(containerColor = Color.Transparent, contentColor = onBackgroundColor),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
@@ -127,36 +180,45 @@ fun MusicPlayerScreen(deezerViewModel: DeezerViewModel) {
                     )
                     Text(
                         text = it.title,
-                        style = MaterialTheme.typography.titleMedium
+                        style = MaterialTheme.typography.titleMedium,
+                        color = onBackgroundColor
                     )
                     Text(
                         text = it.artist,
-                        style = MaterialTheme.typography.bodyLarge
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = onBackgroundColor
                     )
                     Text(
                         text = it.album,
-                        style = MaterialTheme.typography.bodyMedium
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = onBackgroundColor
                     )
                     
                     Slider(
                         value = currentPosition.toFloat(),
                         onValueChange = { newPosition -> deezerViewModel.seekTo(newPosition.toInt()) },
                         valueRange = 0f..duration.toFloat(),
-                        modifier = Modifier.fillMaxWidth()
+                        modifier = Modifier.fillMaxWidth(),
+                        colors = SliderDefaults.colors(
+                            thumbColor = onBackgroundColor,
+                            activeTrackColor = onBackgroundColor,
+                            inactiveTrackColor = onBackgroundColor.copy(alpha = 0.3f)
+                        )
                     )
                     Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = formatMillis(currentPosition.toLong()))
-                        Text(text = formatMillis(duration.toLong()))
+                        Text(text = formatMillis(currentPosition.toLong()), color = onBackgroundColor)
+                        Text(text = formatMillis(duration.toLong()), color = onBackgroundColor)
                     }
 
                     IconButton(onClick = { deezerViewModel.playPause() }) {
                         Icon(
                             imageVector = if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
                             contentDescription = if (isPlaying) "Pause" else "Play",
-                            modifier = Modifier.size(48.dp)
+                            modifier = Modifier.size(48.dp),
+                            tint = onBackgroundColor
                         )
                     }
                 }

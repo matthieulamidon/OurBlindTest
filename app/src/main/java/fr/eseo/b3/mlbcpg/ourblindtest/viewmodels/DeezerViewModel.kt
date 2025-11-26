@@ -1,17 +1,20 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.viewmodels
 
+import android.app.Application
 import android.media.MediaPlayer
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import fr.eseo.b3.mlbcpg.ourblindtest.deezerApi.DeezerApi
 import fr.eseo.b3.mlbcpg.ourblindtest.deezerApi.Track
+import fr.eseo.b3.mlbcpg.ourblindtest.utils.DynamicColors
+import fr.eseo.b3.mlbcpg.ourblindtest.utils.getDominantColor
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class DeezerViewModel : ViewModel() {
+class DeezerViewModel(application: Application) : AndroidViewModel(application) {
 
     private var mediaPlayer: MediaPlayer? = null
     private var progressJob: Job? = null
@@ -28,6 +31,9 @@ class DeezerViewModel : ViewModel() {
     private val _duration = MutableStateFlow(0)
     val duration = _duration.asStateFlow()
 
+    private val _dynamicColors = MutableStateFlow<DynamicColors?>(null)
+    val dynamicColors = _dynamicColors.asStateFlow()
+
     fun searchTrack(songName: String, author: String? = null, onTrackReady: (Track?) -> Unit) {
         viewModelScope.launch {
             releasePlayer() // Release previous player if any
@@ -40,6 +46,8 @@ class DeezerViewModel : ViewModel() {
             _track.value = foundTrack
             if (foundTrack != null) {
                 prepareAndPlay(foundTrack.preview)
+                // Extract colors
+                _dynamicColors.value = getDominantColor(getApplication(), foundTrack.albumArtUrl)
             }
             onTrackReady(foundTrack)
         }
@@ -106,6 +114,7 @@ class DeezerViewModel : ViewModel() {
         _currentPosition.value = 0
         _duration.value = 0
         _track.value = null
+        _dynamicColors.value = null
     }
 
     override fun onCleared() {
