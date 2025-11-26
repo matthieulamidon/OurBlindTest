@@ -69,6 +69,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     androidTestImplementation(libs.androidx.room.testing)
     androidTestImplementation(libs.androidx.junit.ktx)
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 ksp {

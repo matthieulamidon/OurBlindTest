@@ -23,7 +23,7 @@ class InGameViewModel(val repository: InGameRepository): ViewModel() {
     private val _question = MutableStateFlow<QuestionBlindTest?>(null)
     val question : StateFlow<QuestionBlindTest?> = _question.asStateFlow()
     
-    private val _setting = MutableStateFlow(Setting(nb = 0, theme = "null", sbTheme = "null"))
+    private val _setting = MutableStateFlow(Setting(nb = 5, theme = "null", sbTheme = "null"))
     val setting : StateFlow<Setting> = _setting.asStateFlow()
 
 
