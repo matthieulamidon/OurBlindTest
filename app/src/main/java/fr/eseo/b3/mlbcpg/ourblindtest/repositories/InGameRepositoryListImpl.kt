@@ -3,10 +3,17 @@ package fr.eseo.b3.mlbcpg.ourblindtest.repositories
 import fr.eseo.b3.mlbcpg.ourblindtest.ListOfQuestion.ListOfQuestion
 import fr.eseo.b3.mlbcpg.ourblindtest.model.QuestionBlindTest
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
+import fr.eseo.b3.mlbcpg.ourblindtest.model.SubTheme
+import fr.eseo.b3.mlbcpg.ourblindtest.model.Theme
 
 class InGameRepositoryListImpl: InGameRepository {
     private var listOfQuestion = mutableListOf<QuestionBlindTest>()
-    private var setting = Setting()
+    private var setting = Setting(
+        nb = 5,
+        theme = Theme.JEU_VIDEO,
+        subTheme = SubTheme.HOLLOW_KNIGHT
+    )
+
     private var pseudo = ""
     private var score = 0
     private var currentQuestion = 0

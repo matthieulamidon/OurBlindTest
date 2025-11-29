@@ -1,7 +1,7 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.model
 
-data class Setting (
-    var nb : Int = 0,
-    var theme : String = "",
-    var sbTheme : String = ""
+data class Setting(
+    var nb: Int,
+    var theme: Theme,
+    var subTheme: SubTheme? = null
 )

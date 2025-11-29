@@ -57,8 +57,9 @@ import java.time.LocalDateTime
 
 @Composable
 fun MainScreen(onStartQuiz: () -> Unit,
-   InGameVm: InGameViewModel,
-   OurBlindTestVm : OurBlindTestViewModel) {
+   onSettingsBtn: () -> Unit,
+   inGameVm: InGameViewModel,
+   ourBlindTestVm : OurBlindTestViewModel) {
     Surface(
         modifier = Modifier
             .fillMaxSize()
@@ -78,8 +79,9 @@ fun MainScreen(onStartQuiz: () -> Unit,
                     MainScreenContent(
                         modifier = Modifier.fillMaxWidth(),
                         onStartQuiz = onStartQuiz,
-                        InGameVm =  InGameVm,
-                        OurBlindTestVm = OurBlindTestVm
+                        onSettingsBtn = onSettingsBtn,
+                        inGameVm =  inGameVm,
+                        ourBlindTestVm = ourBlindTestVm
                     )
                 }
             }
@@ -91,13 +93,14 @@ fun MainScreen(onStartQuiz: () -> Unit,
 private fun MainScreenContent(
     modifier: Modifier,
     onStartQuiz: () -> Unit,
-    InGameVm: InGameViewModel,
-    OurBlindTestVm: OurBlindTestViewModel
+    onSettingsBtn: () -> Unit,
+    inGameVm: InGameViewModel,
+    ourBlindTestVm: OurBlindTestViewModel
 ) {
     var pseudo by remember { mutableStateOf("") }
 
     // récupération des scores via le viewModel
-    val scoreList by OurBlindTestVm.scores.collectAsState()
+    val scoreList by ourBlindTestVm.scores.collectAsState()
 
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
@@ -138,7 +141,10 @@ private fun MainScreenContent(
 
             // Bouton Start
             Button(
-                onClick = onStartQuiz,
+                onClick = {
+                    inGameVm.setPseudo(pseudo)
+                    onStartQuiz()
+                },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Commencer le quiz")
@@ -148,7 +154,7 @@ private fun MainScreenContent(
 
             // Settings
             Button(
-                onClick = {},
+                onClick = {onSettingsBtn()},
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Settings")
@@ -203,8 +209,9 @@ fun HomeScreenPreview() {
     OurBlindTestTheme {
         MainScreen(
             onStartQuiz = {},
-            InGameVm = fakeViewModelInGame,
-            OurBlindTestVm = fakeViewModel
+            onSettingsBtn = {},
+            inGameVm = fakeViewModelInGame,
+            ourBlindTestVm = fakeViewModel
         )
     }
 }
