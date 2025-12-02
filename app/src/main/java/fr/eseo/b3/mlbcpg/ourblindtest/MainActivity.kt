@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import fr.eseo.b3.mlbcpg.ourblindtest.ui.navigation.AppNavigation
 import androidx.lifecycle.viewmodel.compose.viewModel
 import fr.eseo.b3.mlbcpg.ourblindtest.ListOfQuestion.ListOfQuestion
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
@@ -27,18 +28,8 @@ import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModelFactory
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            OurBlindTestTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-
-
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            AppNavigation()
         }
     }
 }
@@ -48,23 +39,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
     val application = LocalContext.current.applicationContext as Application
     val repository = OurBlindTestRepositoriesRoomImp(application)
-    val setting: Setting = Setting(5,"null","Hollow kight")
-
-    val viewModel : InGameViewModel = viewModel(
-        factory = InGameViewModelFactory(
-            (InGameRepositoryListImpl())
-        )
-    )
-
-    val test = viewModel.nextQuestion()
-    Log.d("test", test.toString())
-
-    val question = ListOfQuestion().generateQuestions(setting)
-    Log.d("question", question.toString())
-
-
-
-
 
     Text(
         text = "Hello $name!",

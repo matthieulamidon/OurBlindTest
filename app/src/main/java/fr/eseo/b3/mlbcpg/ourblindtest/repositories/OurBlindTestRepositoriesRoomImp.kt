@@ -23,7 +23,6 @@ class OurBlindTestRepositoriesRoomImp(application: Application) : OurBlindTestRe
         return scoreDao.getNoteById(scoreId)
     }
 
-
     override suspend fun deleteScore(score: Score) {
         return scoreDao.delete(score)
     }

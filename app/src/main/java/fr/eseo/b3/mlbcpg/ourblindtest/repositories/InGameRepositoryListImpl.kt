@@ -3,10 +3,17 @@ package fr.eseo.b3.mlbcpg.ourblindtest.repositories
 import fr.eseo.b3.mlbcpg.ourblindtest.ListOfQuestion.ListOfQuestion
 import fr.eseo.b3.mlbcpg.ourblindtest.model.QuestionBlindTest
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
+import fr.eseo.b3.mlbcpg.ourblindtest.model.SubTheme
+import fr.eseo.b3.mlbcpg.ourblindtest.model.Theme
 
 class InGameRepositoryListImpl: InGameRepository {
     private var listOfQuestion = mutableListOf<QuestionBlindTest>()
-    private var setting = Setting()
+    private var setting = Setting(
+        nb = 5,
+        theme = Theme.JEU_VIDEO,
+        subTheme = SubTheme.HOLLOW_KNIGHT
+    )
+
     private var pseudo = ""
     private var score = 0
     private var currentQuestion = 0
@@ -16,6 +23,11 @@ class InGameRepositoryListImpl: InGameRepository {
     }
 
     override suspend fun getNextQuestion(): QuestionBlindTest {
+        if (listOfQuestion.isEmpty()) {
+            val testQuestion : QuestionBlindTest = QuestionBlindTest("Reponse", "I Am Steve", "faux A", "faux B", "faux C")
+            listOfQuestion.add(testQuestion)
+            return listOfQuestion[0]
+        }
         return listOfQuestion[currentQuestion]
     }
 
@@ -46,7 +58,7 @@ class InGameRepositoryListImpl: InGameRepository {
     }
 
     override suspend fun nextQuestion() {
-        currentQuestion++
+        currentQuestion = currentQuestion + 1;
     }
 
     override suspend fun getIdQuestion(): Int {
@@ -63,7 +75,7 @@ class InGameRepositoryListImpl: InGameRepository {
     }
 
     override suspend fun addScore(scoreImp: Int) {
-        score += scoreImp
+        score = score + scoreImp
     }
 
     override suspend fun setSetting(settingImp: Setting) {
@@ -72,6 +84,11 @@ class InGameRepositoryListImpl: InGameRepository {
 
     override suspend fun getSetting(): Setting {
         return setting
+    }
+
+    override suspend fun resetGame() {
+        score = 0
+        currentQuestion = 0
     }
 
 }
