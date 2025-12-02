@@ -37,18 +37,12 @@ fun AppNavigation() {
         startDestination = "home"
     ) {
         composable("home") {
-            MainScreen(onStartQuiz = {
-                navController.navigate("quiz")
-            },
-            onSettingsBtn = {
-                navController.navigate("settings")
-            },inGameVM, ourBlindTestVM)
             MainScreen(
                 onStartQuiz = { navController.navigate("quiz") },
                 onMusicPlayer = { navController.navigate("musicPlayer") },
-                inGameVM,
-                ourBlindTestVM
-            )
+                onSettingsBtn = {
+                    navController.navigate("settings")
+                },inGameVM, ourBlindTestVM)
         }
         composable("quiz") {
             QuizScreen(
