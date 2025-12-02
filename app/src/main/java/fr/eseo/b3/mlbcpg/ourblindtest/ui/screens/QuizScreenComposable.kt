@@ -1,6 +1,7 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -42,6 +43,7 @@ import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import kotlinx.coroutines.delay
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.DeezerViewModel
 
 /*
 @Composable
@@ -178,7 +180,7 @@ fun AnswerButton(text: String, onClick: () -> Unit) {
 }
 */
 @Composable
-fun QuizScreen(onFinish: () -> Unit, onStartQuiz: () -> Unit, InGameVM: InGameViewModel) {
+fun QuizScreen(onFinish: () -> Unit, onStartQuiz: () -> Unit, DeezerVM: DeezerViewModel, InGameVM: InGameViewModel) {
 
     val question by InGameVM.question.collectAsState()
 
@@ -212,7 +214,8 @@ fun QuizScreen(onFinish: () -> Unit, onStartQuiz: () -> Unit, InGameVM: InGameVi
                         onStartQuiz = onStartQuiz,
                         onFinish = onFinish,
                         answers = shuffledAnswers as List<String>,
-                        InGameVM = InGameVM
+                        InGameVM = InGameVM,
+                        DeezerVM = DeezerVM,
                     )
                 }
             }
@@ -226,7 +229,8 @@ private fun QuizScreenContent(
     answers: List<String>,
     onStartQuiz: () -> Unit,
     onFinish: () -> Unit,
-    InGameVM: InGameViewModel
+    InGameVM: InGameViewModel,
+    DeezerVM: DeezerViewModel
 ) {
     val questionState by InGameVM.question.collectAsState()
     val goodAnswer = questionState?.title
@@ -234,6 +238,12 @@ private fun QuizScreenContent(
     val currentQuestion by InGameVM.currentQuestion.collectAsState()
     val setting by InGameVM.setting.collectAsState()
     val nbOfQuestion = setting.nb
+    InGameVM.getNextQuestion()
+    Log.d("ReponseBT", questionState?.title ?: "eeeeee")
+
+    LaunchedEffect(Unit) {
+        DeezerVM.searchTrack(questionState?.title ?: "", /*questionState?.author ?: */null) {}
+    }
 
 
 
@@ -256,12 +266,15 @@ private fun QuizScreenContent(
             isAnswerRevealed = false
             selectedAnswer = null
 
-            if (currentIndex < totalQuestions) {
+            if ( (currentIndex + 1) < totalQuestions) {
                 // Il reste des questions
                 InGameVM.nextQuestion()
+                DeezerVM.playPause()
                 onStartQuiz() // Recharge la vue ou navigue vers soi-même
             } else {
                 // C'est fini
+
+                DeezerVM.playPause()
                 onFinish()
             }
         }
@@ -365,7 +378,7 @@ fun AnswerButton(
         Text(text, fontSize = 24.sp, color = Color.White)
     }
 }
-
+/*
 @SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
@@ -373,6 +386,7 @@ fun QuizScreenPreview() {
     OurBlindTestTheme {
         val ViewModelInGame = InGameViewModel(InGameRepositoryListImpl())
         val question: QuestionBlindTest? by ViewModelInGame.question.collectAsState()
+
 
         val shuffledAnswers = remember(question) {
             if (question != null) {
@@ -398,10 +412,11 @@ fun QuizScreenPreview() {
             onStartQuiz = {},
             answers = shuffledAnswers as List<String>,
             InGameVM = ViewModelInGame,
-            onFinish = {}
+            onFinish = {},
+            DeezerVM = DeezerViewModel()
         )
     }
-}
+}*/
 
 @Composable
 fun GameTimer(

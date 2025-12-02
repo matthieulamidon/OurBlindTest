@@ -46,7 +46,8 @@ fun AppNavigation() {
                 onStartQuiz = {
                     navController.navigate("quiz")
                 },
-                InGameVM
+                DeezerVM = deezerVM,
+                InGameVM = inGameVM
             )
         }
         composable("results") {
