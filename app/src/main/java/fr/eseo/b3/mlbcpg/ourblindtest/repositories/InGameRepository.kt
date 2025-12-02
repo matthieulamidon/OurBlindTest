@@ -32,4 +32,6 @@ interface InGameRepository {
 
     suspend fun getSetting(): Setting
 
+    suspend fun resetGame()
+
 }

@@ -7,9 +7,17 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
 
+data class Track(
+    val title: String,
+    val artist: String,
+    val album: String,
+    val preview: String,
+    val albumArtUrl: String
+)
+
 object DeezerApi {
 
-    suspend fun searchTrack(query: String): String? = withContext(Dispatchers.IO) {
+    suspend fun searchTrack(query: String): Track? = withContext(Dispatchers.IO) {
         // Ajout de &strict=on pour des résultats plus précis
         val url = URL("https://api.deezer.com/search/track?q=${URLEncoder.encode(query, "UTF-8")}&limit=1&strict=on")
         val conn = url.openConnection() as HttpURLConnection
@@ -20,7 +28,14 @@ object DeezerApi {
             val json = JSONObject(response)
             val items = json.getJSONArray("data")
             if (items.length() > 0) {
-                return@withContext items.getJSONObject(0).getString("preview")
+                val trackJson = items.getJSONObject(0)
+                val title = trackJson.getString("title")
+                val artist = trackJson.getJSONObject("artist").getString("name")
+                val albumObject = trackJson.getJSONObject("album")
+                val album = albumObject.getString("title")
+                val albumArtUrl = albumObject.getString("cover_medium")
+                val preview = trackJson.getString("preview")
+                return@withContext Track(title, artist, album, preview, albumArtUrl)
             }
         }
         null

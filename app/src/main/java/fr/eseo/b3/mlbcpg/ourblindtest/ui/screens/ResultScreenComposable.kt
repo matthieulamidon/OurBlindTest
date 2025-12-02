@@ -11,32 +11,36 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.QuizViewModel
+import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
+import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModel
 
 @Composable
 fun ResultScreen(
-    viewModel: QuizViewModel = viewModel(),
+    inGameViewModel: InGameViewModel,
+    ourBlindTestViewModel: OurBlindTestViewModel,
     onRestart: () -> Unit
 ) {
-    val score by viewModel.score
+    val score by inGameViewModel.score.collectAsState()
+    val pseudo by inGameViewModel.pseudo.collectAsState()
+
+    LaunchedEffect(Unit) {
+        ourBlindTestViewModel.addOrUpdatescore(Score(name = pseudo, score = score))
+    }
 
     Surface(
         modifier = Modifier
@@ -56,7 +60,9 @@ fun ResultScreen(
                 Column(modifier = Modifier.padding(innerPadding)) {
                     ResultScreenContent(
                         modifier = Modifier.fillMaxWidth(),
-                        onRestart = onRestart
+                        onRestart = onRestart,
+                        score = score,
+                        pseudo = pseudo
                     )
                 }
             }
@@ -64,13 +70,14 @@ fun ResultScreen(
     }
 
 }
+
 @SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
 fun ResultScreenPreview() {
-    val vm = QuizViewModel().apply { answerCorrect() } // score = 1
     ResultScreen(
-        viewModel = vm,
+        inGameViewModel = InGameViewModel(InGameRepositoryListImpl()),
+        ourBlindTestViewModel = OurBlindTestViewModel(FakeRepo()),
         onRestart = {}
     )
 }
@@ -78,9 +85,10 @@ fun ResultScreenPreview() {
 @Composable
 private fun ResultScreenContent(
     modifier: Modifier,
-    onRestart: () -> Unit
+    onRestart: () -> Unit,
+    score: Int,
+    pseudo: String
 ){
-    var score by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxSize(),
@@ -88,6 +96,8 @@ private fun ResultScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text("Résultat 🎉", fontSize = 28.sp)
+        Spacer(Modifier.height(16.dp))
+        Text("Bravo $pseudo !", fontSize = 24.sp)
         Spacer(Modifier.height(16.dp))
         Text("Score : $score", fontSize = 24.sp)
         Spacer(Modifier.height(24.dp))
@@ -98,4 +108,3 @@ private fun ResultScreenContent(
     }
 
 }
-

@@ -57,6 +57,7 @@ import java.time.LocalDateTime
 
 @Composable
 fun MainScreen(onStartQuiz: () -> Unit,
+   onMusicPlayer: () -> Unit,
    onSettingsBtn: () -> Unit,
    inGameVm: InGameViewModel,
    ourBlindTestVm : OurBlindTestViewModel) {
@@ -80,6 +81,7 @@ fun MainScreen(onStartQuiz: () -> Unit,
                         modifier = Modifier.fillMaxWidth(),
                         onStartQuiz = onStartQuiz,
                         onSettingsBtn = onSettingsBtn,
+                        onMusicPlayer = onMusicPlayer,
                         inGameVm =  inGameVm,
                         ourBlindTestVm = ourBlindTestVm
                     )
@@ -93,6 +95,7 @@ fun MainScreen(onStartQuiz: () -> Unit,
 private fun MainScreenContent(
     modifier: Modifier,
     onStartQuiz: () -> Unit,
+    onMusicPlayer: () -> Unit,
     onSettingsBtn: () -> Unit,
     inGameVm: InGameViewModel,
     ourBlindTestVm: OurBlindTestViewModel
@@ -148,6 +151,16 @@ private fun MainScreenContent(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text("Commencer le quiz")
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            // Bouton Music Player
+            Button(
+                onClick = { onMusicPlayer() },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Lecteur de musique")
             }
 
             Spacer(Modifier.height(32.dp))
@@ -209,6 +222,7 @@ fun HomeScreenPreview() {
     OurBlindTestTheme {
         MainScreen(
             onStartQuiz = {},
+            onMusicPlayer = {},
             onSettingsBtn = {},
             inGameVm = fakeViewModelInGame,
             ourBlindTestVm = fakeViewModel
