@@ -24,7 +24,7 @@ class InGameRepositoryListImpl: InGameRepository {
 
     override suspend fun getNextQuestion(): QuestionBlindTest {
         if (listOfQuestion.isEmpty()) {
-            val testQuestion : QuestionBlindTest = QuestionBlindTest("testa", "testa", "testa", "testa", "testa")
+            val testQuestion : QuestionBlindTest = QuestionBlindTest("Reponse", "I Am Steve", "faux A", "faux B", "faux C")
             listOfQuestion.add(testQuestion)
             return listOfQuestion[0]
         }
@@ -58,7 +58,7 @@ class InGameRepositoryListImpl: InGameRepository {
     }
 
     override suspend fun nextQuestion() {
-        currentQuestion++
+        currentQuestion = currentQuestion + 1;
     }
 
     override suspend fun getIdQuestion(): Int {
@@ -75,7 +75,7 @@ class InGameRepositoryListImpl: InGameRepository {
     }
 
     override suspend fun addScore(scoreImp: Int) {
-        score += scoreImp
+        score = score + scoreImp
     }
 
     override suspend fun setSetting(settingImp: Setting) {

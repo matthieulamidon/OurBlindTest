@@ -9,12 +9,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
+import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.MainScreen
-import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.MusicPlayerScreen
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.QuizScreen
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.ResultScreen
-import fr.eseo.b3.mlbcpg.ourblindtest.ui.screens.SettingsScreen
-import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.DeezerViewModel
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModelFactory
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModel
@@ -25,56 +23,40 @@ fun AppNavigation() {
     val navController = rememberNavController()
     val application = LocalContext.current.applicationContext as Application
     val ourBlindTestVM: OurBlindTestViewModel = viewModel(
-        factory = OurBlindTestViewModelFactory(OurBlindTestRepositoriesRoomImp(application))
+        factory = OurBlindTestViewModelFactory(OurBlindTestRepositoryListImpl())
     )
-    val inGameVM: InGameViewModel = viewModel(
+    val InGameVM: InGameViewModel = viewModel(
         factory = InGameViewModelFactory(InGameRepositoryListImpl())
     )
-    val deezerVM: DeezerViewModel = viewModel()
 
     NavHost(
         navController = navController,
         startDestination = "home"
     ) {
         composable("home") {
-            MainScreen(
-                onStartQuiz = { navController.navigate("quiz") },
-                onMusicPlayer = { navController.navigate("musicPlayer") },
-                onSettingsBtn = {
-                    navController.navigate("settings")
-                },inGameVM, ourBlindTestVM)
+            MainScreen(onStartQuiz = {
+                navController.navigate("quiz")
+            },InGameVM, ourBlindTestVM)
         }
         composable("quiz") {
             QuizScreen(
                 onFinish = {
                     navController.navigate("results")
-                }, inGameVM
+                },
+                onStartQuiz = {
+                    navController.navigate("quiz")
+                },
+                InGameVM
             )
         }
         composable("results") {
             ResultScreen(
-                inGameViewModel = inGameVM,
-                ourBlindTestViewModel = ourBlindTestVM,
                 onRestart = {
-                    inGameVM.resetGame()
-                    ourBlindTestVM.refreshScores()
                     navController.navigate("home") {
                         popUpTo("home") { inclusive = true }
                     }
                 }
             )
-        }
-        composable("settings") {
-            SettingsScreen(
-                onValidate = {
-                    navController.navigate("home") {
-                        popUpTo("home") { inclusive = true }
-                    }
-                }, inGameVM
-            )
-        }
-        composable("musicPlayer") {
-            MusicPlayerScreen(deezerViewModel = deezerVM)
         }
     }
 }
