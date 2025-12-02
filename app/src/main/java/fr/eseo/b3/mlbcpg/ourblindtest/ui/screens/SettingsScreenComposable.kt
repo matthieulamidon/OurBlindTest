@@ -90,10 +90,6 @@ private fun SettingsScreenContent(
     var theme by remember { mutableStateOf(currentSetting.theme) }
     var subTheme by remember { mutableStateOf<SubTheme?>(currentSetting.subTheme) }
 
-    LaunchedEffect(theme) { // ça sert à reset le sous-thème quand on change de thème
-        subTheme = theme.availableSubThemes.firstOrNull()
-    }
-
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         modifier = modifier.padding(16.dp)
@@ -127,7 +123,8 @@ private fun SettingsScreenContent(
 
             ThemeDropdown(
                 current = theme,
-                onChange = { theme = it }
+                onChange = { theme = it
+                    subTheme = theme.availableSubThemes.firstOrNull()}
             )
 
             Spacer(Modifier.height(24.dp))

@@ -27,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -42,6 +43,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import fr.eseo.b3.mlbcpg.ourblindtest.R
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
+import fr.eseo.b3.mlbcpg.ourblindtest.model.SubTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepository
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
@@ -105,6 +107,12 @@ private fun MainScreenContent(
     // récupération des scores via le viewModel
     val scoreList by ourBlindTestVm.scores.collectAsState()
 
+    val currentSetting by inGameVm.setting.collectAsState()
+
+    var nb by remember { mutableIntStateOf(currentSetting.nb) }
+    var theme by remember { mutableStateOf(currentSetting.theme) }
+    var subTheme by remember { mutableStateOf<SubTheme?>(currentSetting.subTheme) }
+
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         modifier = modifier.padding(16.dp)
@@ -118,7 +126,7 @@ private fun MainScreenContent(
         ) {
             // Affichage du tableau des scores
             Text(
-                "Tableau des scores",
+                stringResource(id = R.string.scores_table),
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold
             )
@@ -129,7 +137,7 @@ private fun MainScreenContent(
             Spacer(Modifier.height(40.dp))
 
             // Titre
-            Text("Blind Test 🎵", fontSize = 28.sp)
+            Text(text = stringResource(id = R.string.blind_test), fontSize = 28.sp)
 
             Spacer(Modifier.height(16.dp))
 
@@ -137,7 +145,7 @@ private fun MainScreenContent(
             TextField(
                 value = pseudo,
                 onValueChange = { pseudo = it },
-                label = { Text("Pseudo") }
+                label = { Text(stringResource(id = R.string.pseudo)) }
             )
 
             Spacer(Modifier.height(16.dp))
@@ -150,7 +158,7 @@ private fun MainScreenContent(
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Commencer le quiz")
+                Text(stringResource(id = R.string.begin_quiz))
             }
 
             Spacer(Modifier.height(16.dp))
@@ -160,7 +168,7 @@ private fun MainScreenContent(
                 onClick = { onMusicPlayer() },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Lecteur de musique")
+                Text(stringResource(id = R.string.music_player))
             }
 
             Spacer(Modifier.height(32.dp))
@@ -170,8 +178,14 @@ private fun MainScreenContent(
                 onClick = {onSettingsBtn()},
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Settings")
+                Text(stringResource(id = R.string.settings))
             }
+
+            Spacer(Modifier.height(32.dp))
+
+            Text("Nombre de questions = ${nb}", fontSize = 10.sp)
+            Text("Theme = ${theme.label}", fontSize = 10.sp)
+            Text("Sous theme = ${subTheme?.label}", fontSize = 10.sp)
         }
     }
 }

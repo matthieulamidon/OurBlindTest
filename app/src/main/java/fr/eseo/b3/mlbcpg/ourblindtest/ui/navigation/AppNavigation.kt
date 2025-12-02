@@ -67,9 +67,7 @@ fun AppNavigation() {
         composable("settings") {
             SettingsScreen(
                 onValidate = {
-                    navController.navigate("home") {
-                        popUpTo("home") { inclusive = true }
-                    }
+                    navController.navigate("home")
                 }, inGameVM
             )
         }
