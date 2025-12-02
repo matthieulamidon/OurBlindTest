@@ -13,14 +13,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class InGameViewModel(val repository: InGameRepository): ViewModel() {
-    private val _pseudo = MutableStateFlow("")
-    val pseudo : StateFlow<String> = _pseudo.asStateFlow()
+    private val _pseudo = MutableStateFlow<String>("")
+    var pseudo : StateFlow<String> = _pseudo.asStateFlow()
 
-    private val _score = MutableStateFlow(0)
-    val score : StateFlow<Int> = _score.asStateFlow()
+    private val _score = MutableStateFlow<Int>(0)
+    var score : StateFlow<Int> = _score.asStateFlow()
 
-    private val _idQuestion = MutableStateFlow(0)
-    val idQuestion : StateFlow<Int> = _idQuestion.asStateFlow()
+    private val _currentQuestion = MutableStateFlow<Int>(0)
+    val currentQuestion : StateFlow<Int> = _currentQuestion.asStateFlow()
 
     private val _question = MutableStateFlow<QuestionBlindTest?>(null)
     val question : StateFlow<QuestionBlindTest?> = _question.asStateFlow()
@@ -55,7 +55,7 @@ class InGameViewModel(val repository: InGameRepository): ViewModel() {
     fun loadValue() {
        viewModelScope.launch {
            _pseudo.value = repository.getPseudo()
-           _idQuestion.value = repository.getIdQuestion()
+           _currentQuestion.value = repository.getIdQuestion()
            _score.value = repository.getScore()
        }
     }
@@ -63,6 +63,7 @@ class InGameViewModel(val repository: InGameRepository): ViewModel() {
     fun nextQuestion(){
         viewModelScope.launch {
             repository.nextQuestion()
+            _currentQuestion.value = _currentQuestion.value + 1
         }
     }
     fun getNextQuestion(){
@@ -91,6 +92,15 @@ class InGameViewModel(val repository: InGameRepository): ViewModel() {
     fun resetGame() {
         viewModelScope.launch {
             repository.resetGame()
+            reload()
+        }
+    }
+
+    fun generateListOfQuestion() {
+        viewModelScope.launch {
+            // 1. On génère la liste dans le repo
+            repository.generateListOfQuestion()
+            // 2. On met à jour l'interface avec les nouvelles valeurs (index 0, score 0)
             reload()
         }
     }

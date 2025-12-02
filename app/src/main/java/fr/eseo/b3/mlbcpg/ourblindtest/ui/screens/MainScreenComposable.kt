@@ -154,6 +154,7 @@ private fun MainScreenContent(
             Button(
                 onClick = {
                     inGameVm.setPseudo(pseudo)
+                    inGameVm.generateListOfQuestion()
                     onStartQuiz()
                 },
                 modifier = Modifier.fillMaxWidth()
@@ -245,20 +246,20 @@ fun HomeScreenPreview() {
 }
 
 
- /*
-@Composable
-@Preview(
-    showBackground = true,
-    showSystemUi = true
-)
-private fun preview() {
-    OurBlindTestTheme {  {
-        val viewModel : OurBlindTestViewModel = viewModel(
-            factory = NoteTakerViewModelFactory(NoteTakerRepositoryListImpl())
-        )
-        DetailsScreen(rememberNavController(), "1", viewModel)
+/*
+    @Composable
+    @Preview(
+        showBackground = true,
+        showSystemUi = true
+    )
+    private fun preview() {
+        OurBlindTestTheme {  {
+            val viewModel : OurBlindTestViewModel = viewModel(
+                factory = NoteTakerViewModelFactory(NoteTakerRepositoryListImpl())
+            )
+            DetailsScreen(rememberNavController(), "1", viewModel)
+        }
     }
-}
 */
 
 
