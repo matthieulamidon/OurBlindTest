@@ -407,7 +407,7 @@ class ListOfQuestion {
                 {
                     "id": 49,
                     "name": "When The Moon's Reaching Out Stars -Reload-",
-                    "author": "Azumi Takahashi / ATLUS Sound Team",
+                    "author": "Azumi Takahashi",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
@@ -415,7 +415,7 @@ class ListOfQuestion {
                 {
                     "id": 50,
                     "name": "Pursuing My True Self",
-                    "author": "Shihoko Hirata / ATLUS Sound Team",
+                    "author": "平田志穂子",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
@@ -423,7 +423,7 @@ class ListOfQuestion {
                 {
                     "id": 51,
                     "name": "I'll Face Myself -Battle-",
-                    "author": "ATLUS Sound Team",
+                    "author": "アトラスサウンドチーム",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
@@ -446,8 +446,8 @@ class ListOfQuestion {
                 },
                 {
                     "id": 54,
-                    "name": "Wiping All Out",
-                    "author": "Shoji Meguro",
+                    "name": "Your Affection",
+                    "author": "平田志穂子",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
@@ -455,7 +455,7 @@ class ListOfQuestion {
                 {
                     "id": 55,
                     "name": "Time To Make History",
-                    "author": "Shoji Meguro",
+                    "author": "平田志穂子",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
@@ -463,7 +463,7 @@ class ListOfQuestion {
                 {
                     "id": 56,
                     "name": "Heaven",
-                    "author": "Shoji Meguro",
+                    "author": "平田志穂子",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
@@ -471,23 +471,23 @@ class ListOfQuestion {
                 {
                     "id": 57,
                     "name": "Heartbeat, Heartbreak",
-                    "author": "Shoji Meguro",
+                    "author": "平田志穂子",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
                 },
                 {
                     "id": 58,
-                    "name": "Deep Breath Deep Breath",
-                    "author": "Shoji Meguro",
+                    "name": "Color Your Night",
+                    "author": "Lotus Juice",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
                 },
                 {
                     "id": 59,
-                    "name": "The Fog",
-                    "author": "Shoji Meguro",
+                    "name": "Reach Out To The Truth",
+                    "author": "平田志穂子",
                     "theme": "Video Game",
                     "subTheme": "Persona",
                     "previewUrl": null
@@ -518,7 +518,7 @@ class ListOfQuestion {
                 },
                 {
                     "id": 63,
-                    "name": "Daredevil",
+                    "name": "Layer Cake",
                     "author": "ATLUS Sound Team",
                     "theme": "Video Game",
                     "subTheme": "Persona",
@@ -527,9 +527,321 @@ class ListOfQuestion {
                 {
                     "id": 64,
                     "name": "Throw Away Your Mask",
-                    "author": "ATLUS Sound Team",
+                    "author": "Lyn Inaizumi",
                     "theme": "Video Game",
                     "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 65,
+                    "name": "Libérée, délivrée",
+                    "author": "Anaïs Delva",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 66,
+                    "name": "Ce rêve bleu",
+                    "author": "Karine Costa, Paolo Domingo",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 67,
+                    "name": "L'Histoire De La Vie",
+                    "author": "Debbie Davis",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 68,
+                    "name": "Comme un homme",
+                    "author": "Patrick Fiori, José Garcia, Thierry Ragueneau",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 69,
+                    "name": "Sous l'océan",
+                    "author": "Henri Salvador",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 70,
+                    "name": "Je Voudrais Déjà Être Roi",
+                    "author": "Dimitri Rougeul, Michel Prudhomme",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 71,
+                    "name": "Ne parlons pas de Bruno",
+                    "author": "Sharon Laloum, Julian Ortiz Cardona",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 72,
+                    "name": "Où est la vraie vie ?",
+                    "author": "Maeva Méline",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 73,
+                    "name": "Hakuna Matata",
+                    "author": "Dimitri Rougeul, Emmanuel Curtil, Jean-Philippe Puymartin",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 74,
+                    "name": "Il En Faut Peu Pour Être Heureux",
+                    "author": "Jean Stout, Pascal Bressy",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 75,
+                    "name": "Partir là-bas",
+                    "author": "Claire Guyot",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 76,
+                    "name": "L'air Du Vent",
+                    "author": "Laura Mayne",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 77,
+                    "name": "Femme Like U",
+                    "author": "K-Maro",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 78,
+                    "name": "La Boulette (Génération Nan Nan)",
+                    "author": "Diam's",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 79,
+                    "name": "Temperature",
+                    "author": "Sean Paul",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 80,
+                    "name": "Umbrella",
+                    "author": "Rihanna, JAY Z",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 81,
+                    "name": "Hips Don't Lie (feat. Wyclef Jean)",
+                    "author": "Shakira, Wyclef Jean",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 82,
+                    "name": "En apesanteur",
+                    "author": "Calogero",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 83,
+                    "name": "Dernière danse",
+                    "author": "Kyo",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 84,
+                    "name": "Crazy In Love (feat. JAY-Z)",
+                    "author": "Beyoncé, JAY Z",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 85,
+                    "name": "Toxic",
+                    "author": "Britney Spears",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 86,
+                    "name": "J'ai demandé à la lune",
+                    "author": "Indochine",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 87,
+                    "name": "Love Don't Let Me Go",
+                    "author": "David Guetta",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 88,
+                    "name": "Moi... Lolita",
+                    "author": "Alizée",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 89,
+                    "name": "I Gotta Feeling",
+                    "author": "Black Eyed Peas",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 90,
+                    "name": "Poker Face",
+                    "author": "Lady Gaga",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 91,
+                    "name": "Single Ladies (Put a Ring on It)",
+                    "author": "Beyoncé",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 92,
+                    "name": "Hot N Cold",
+                    "author": "Katy Perry",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 93,
+                    "name": "Get the Party Started",
+                    "author": "P!nk",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 94,
+                    "name": "Mr. Brightside",
+                    "author": "The Killers",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 95,
+                    "name": "One More Time",
+                    "author": "Daft Punk",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 96,
+                    "name": "Hey Ya!",
+                    "author": "Outkast",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 97,
+                    "name": "Rehab",
+                    "author": "Amy Winehouse",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 98,
+                    "name": "Chasing Cars",
+                    "author": "Snow Patrol",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 99,
+                    "name": "Shut Up",
+                    "author": "Black Eyed Peas",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 100,
+                    "name": "Ma philosophie",
+                    "author": "Amel Bent",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 101,
+                    "name": "Le vent nous portera",
+                    "author": "Noir Désir",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 102,
+                    "name": "J't'emmène au vent",
+                    "author": "Louise Attaque",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 103,
+                    "name": "Alive",
+                    "author": "Empire of the Sun",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
                     "previewUrl": null
                 }
         ]
