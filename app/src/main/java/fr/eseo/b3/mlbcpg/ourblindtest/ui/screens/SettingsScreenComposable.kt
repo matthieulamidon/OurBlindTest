@@ -5,17 +5,27 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -44,7 +54,6 @@ import fr.eseo.b3.mlbcpg.ourblindtest.model.Theme
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.theme.OurBlindTestTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
-import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModel
 import kotlinx.coroutines.flow.StateFlow
 
 @Composable
@@ -57,13 +66,7 @@ fun SettingsScreen(onValidate: () -> Unit,
         color = MaterialTheme.colorScheme.background
     ) {
         Scaffold (
-            topBar = {
-                OurBlindTestAppBar(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.primary)
-                )
-            },
+            topBar = { OurBlindTestAppBar(modifier = Modifier.fillMaxWidth()) },
             content = { innerPadding ->
                 Column(modifier = Modifier.padding(innerPadding)) {
                     SettingsScreenContent(
@@ -83,144 +86,141 @@ private fun SettingsScreenContent(
     onValidate: () -> Unit,
     inGameVm: InGameViewModel,
 ) {
+    val allThemes = Theme.values().toList()
 
     val currentSetting by inGameVm.setting.collectAsState()
-
     var nb by remember { mutableIntStateOf(currentSetting.nb) }
     var theme by remember { mutableStateOf(currentSetting.theme) }
     var subTheme by remember { mutableStateOf<SubTheme?>(currentSetting.subTheme) }
 
-    Card(
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-        modifier = modifier.padding(16.dp)
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp, vertical = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween // Pour coller le bouton en bas
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
-            Text("Paramètres du Blind Test", fontSize = 28.sp)
+            Text(
+                "Paramètres du Blind Test",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
 
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(40.dp))
 
-            // ---- NB de questions ----
-            Text("Nombre de questions : $nb", fontSize = 18.sp)
+            //Nombre de questions
+            Text(
+                "Nombre de questions : $nb",
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            Spacer(Modifier.height(8.dp))
 
             Slider(
                 value = nb.toFloat(),
                 onValueChange = { nb = it.toInt() },
                 valueRange = 1f..20f,
-                steps = 19
+                steps = 19,
+                modifier = Modifier.fillMaxWidth()
             )
 
-            Spacer(Modifier.height(24.dp))
+            Spacer(Modifier.height(40.dp))
 
-            // ---- Choix du thème ----
-            Text("Thème", fontSize = 18.sp)
+            //Choix du thème
+            SectionTitle("Thème")
+            
+            FlowRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                allThemes.forEach { currentTheme ->
+                    FilterChip(
+                        selected = theme == currentTheme,
+                        onClick = {
+                            if (theme != currentTheme) {
+                                theme = currentTheme
+                                subTheme = currentTheme.availableSubThemes.firstOrNull()
+                            }
+                        },
+                        label = { Text(currentTheme.label) },
+                        leadingIcon = {
+                            if (theme == currentTheme) {
+                                Icon(Icons.Filled.Check, contentDescription = "Sélectionné")
+                            }
+                        }
+                    )
+                }
+            }
 
-            ThemeDropdown(
-                current = theme,
-                onChange = { theme = it
-                    subTheme = theme.availableSubThemes.firstOrNull()}
-            )
+            Spacer(Modifier.height(40.dp))
 
-            Spacer(Modifier.height(24.dp))
-
-            // ---- Choix du sous-thème ----
+            // Choix du sous-thème 
             if (theme.availableSubThemes.isNotEmpty()) {
-                Text("Sous-thème", fontSize = 18.sp)
+                SectionTitle("Sous-thème")
 
-                SubThemeDropdown(
-                    current = subTheme,
-                    items = theme.availableSubThemes,
-                    onChange = { subTheme = it }
-                )
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    FilterChip(
+                        selected = subTheme == null,
+                        onClick = { subTheme = null },
+                        label = { Text("Aléatoire") },
+                        leadingIcon = {
+                            if (subTheme == null) {
+                                Icon(Icons.Filled.Check, contentDescription = "Aucun sélectionné")
+                            }
+                        }
+                    )
 
+                    theme.availableSubThemes.forEach { currentSubTheme ->
+                        FilterChip(
+                            selected = subTheme == currentSubTheme,
+                            onClick = { subTheme = currentSubTheme },
+                            label = { Text(currentSubTheme.label) },
+                            leadingIcon = {
+                                if (subTheme == currentSubTheme) {
+                                    Icon(Icons.Filled.Check, contentDescription = "Sélectionné")
+                                }
+                            }
+                        )
+                    }
+                }
                 Spacer(Modifier.height(24.dp))
             }
+        }
 
-            Spacer(Modifier.height(32.dp))
+        Spacer(Modifier.height(40.dp))
 
-            Button(
-                onClick = {
-                    inGameVm.updateSetting(nb, theme, subTheme) // subTheme nullable
-                    onValidate()
-                },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Valider les paramètres")
-            }
+        Button(
+            onClick = {
+                inGameVm.updateSetting(nb, theme, subTheme)
+                onValidate()
+            },
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            elevation = ButtonDefaults.elevatedButtonElevation(defaultElevation = 4.dp)
+        ) {
+            Text("Valider les paramètres", style = MaterialTheme.typography.titleMedium)
         }
     }
 }
 
 @Composable
-fun ThemeDropdown(
-    current: Theme,
-    onChange: (Theme) -> Unit
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    Box {
-        OutlinedButton(onClick = { expanded = true }) {
-            Text(current.label)
-        }
-
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-        ) {
-            Theme.values().forEach { value ->
-                DropdownMenuItem(
-                    text = { Text(value.label) },
-                    onClick = {
-                        onChange(value)
-                        expanded = false
-                    }
-                )
-            }
-        }
-    }
-}
-
-@Composable
-fun SubThemeDropdown(
-    current: SubTheme?,
-    items: List<SubTheme>,
-    onChange: (SubTheme?) -> Unit
-) {
-    var expanded by remember { mutableStateOf(false) }
-
-    Box {
-        OutlinedButton(onClick = { expanded = true }) {
-            Text(current?.label ?: "Aucun")
-        }
-
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false }
-        ) {
-            // Option "aucun"
-            DropdownMenuItem(
-                text = { Text("Aucun") },
-                onClick = {
-                    onChange(null)
-                    expanded = false
-                }
-            )
-            items.forEach { value ->
-                DropdownMenuItem(
-                    text = { Text(value.label) },
-                    onClick = {
-                        onChange(value)
-                        expanded = false
-                    }
-                )
-            }
-        }
+fun SectionTitle(title: String) {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text(
+            title,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(bottom = 12.dp)
+        )
+        HorizontalDivider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f))
+        Spacer(Modifier.height(16.dp))
     }
 }
 

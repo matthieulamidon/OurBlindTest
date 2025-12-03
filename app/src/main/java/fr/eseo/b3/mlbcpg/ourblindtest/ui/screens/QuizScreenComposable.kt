@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -43,6 +45,7 @@ import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import kotlinx.coroutines.delay
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.text.style.TextOverflow
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.DeezerViewModel
 
 /*
@@ -202,11 +205,7 @@ fun QuizScreen(onFinish: () -> Unit, onStartQuiz: () -> Unit, DeezerVM: DeezerVi
         color = MaterialTheme.colorScheme.background
     ) {
         Scaffold(
-            topBar = {
-                OurBlindTestAppBar(
-                    modifier = Modifier.fillMaxWidth().background(MaterialTheme.colorScheme.primary)
-                )
-            },
+            topBar = { OurBlindTestAppBar(modifier = Modifier.fillMaxWidth()) },
             content = { innerPadding ->
                 Column(modifier = Modifier.padding(innerPadding)) {
                     QuizScreenContent(
@@ -281,101 +280,130 @@ private fun QuizScreenContent(
     }
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(16.dp),
+        modifier = modifier.fillMaxSize().padding(horizontal = 24.dp).verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.SpaceBetween // Utilisé pour pousser le contenu en haut/bas
     ) {
-        // Zone Timer + Score
-        Box(
-            modifier = Modifier.fillMaxWidth().padding(16.dp),
-            contentAlignment = Alignment.Center
-        ) {
+        // --- 1. EN-TÊTE : Score et Question ---
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+
+            // Score et Numéro de Question (Haut de l'écran)
+            Row(
+                modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Score : $score",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Text(
+                    text = "Question $currentQuestion/$nbOfQuestion",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.SemiBold
+                )
+            }
+
+            Spacer(Modifier.height(32.dp))
+
+            // Timer (Pièce maîtresse)
+            // On le cache si la réponse est révélée
+            if (!isAnswerRevealed) {
+                GameTimer(30, onTimeFinished = {
+                    if (!isAnswerRevealed) {
+                        isAnswerRevealed = true
+                        selectedAnswer = null
+                    }
+                })
+            } else {
+                // Espace pour ne pas faire sauter le layout
+                Spacer(Modifier.height(100.dp))
+            }
+
+            Spacer(Modifier.height(32.dp))
+
+            // Texte de la question
             Text(
-                text = "Score : $score / Question :$currentQuestion/$nbOfQuestion",
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
+                text = "Quelle est cette musique ?",
+                style = MaterialTheme.typography.headlineMedium,
+                fontWeight = FontWeight.ExtraBold,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 12.dp).align(Alignment.TopCenter)
+                color = MaterialTheme.colorScheme.onBackground
             )
 
-            // Timer (caché ou arrêté pendant la révélation si tu veux)
-            if (!isAnswerRevealed) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(top = 50.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    GameTimer(30, onTimeFinished = {
-                        // Si le temps est fini, on considère que c'est faux et on passe
-                        if (!isAnswerRevealed) {
-                            isAnswerRevealed = true
-                            selectedAnswer = null // Pas de réponse sélectionnée
-                        }
-                    })
-                }
-            }
+            Spacer(Modifier.height(40.dp))
         }
 
-        Text(
-            text = "Quelle est cette musique ?",
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 12.dp)
-        )
-
-        Spacer(Modifier.height(40.dp))
-
-        // Affichage des Boutons
-        answers.forEach { answer ->
-            // Calcul de la couleur du bouton
-            val buttonColor = if (isAnswerRevealed) {
-                when {
-                    answer == goodAnswer -> Color.Green // C'est la bonne réponse -> VERT
-                    answer == selectedAnswer -> Color.Red // C'est ma réponse (fausse) -> ROUGE
-                    else -> Color.Gray // Les autres -> GRIS
-                }
-            } else {
-                MaterialTheme.colorScheme.primary // Couleur normale
-            }
-
-            AnswerButton(
-                text = answer,
-                backgroundColor = buttonColor, // On passe la couleur
-                enabled = !isAnswerRevealed,   // On désactive le clic pendant les 3 secondes
-                onClick = {
-                    selectedAnswer = answer
-                    isAnswerRevealed = true // Déclenche le LaunchedEffect plus haut
-
-                    // Logique de points
-                    if (answer == goodAnswer) {
-                        InGameVM.addScore(1)
+        // --- 2. BOUTONS DE RÉPONSE ---
+        Column(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            answers.forEach { answer ->
+                val containerColor = if (isAnswerRevealed) {
+                    when {
+                        answer == goodAnswer -> Color(0xFF4CAF50) // Vert (Succès)
+                        answer == selectedAnswer -> MaterialTheme.colorScheme.error // Rouge (Erreur)
+                        else -> MaterialTheme.colorScheme.surfaceVariant // Gris/Neutre
                     }
-
+                } else {
+                    MaterialTheme.colorScheme.primaryContainer // Couleur par défaut (plus claire que primary)
                 }
-            )
-            Spacer(Modifier.height(20.dp))
+
+                val contentColor = if (isAnswerRevealed) {
+                    if (answer == goodAnswer) Color.White else MaterialTheme.colorScheme.onSurface
+                } else {
+                    MaterialTheme.colorScheme.onPrimaryContainer
+                }
+
+
+                AnswerButton(
+                    text = answer,
+                    containerColor = containerColor,
+                    contentColor = contentColor,
+                    enabled = !isAnswerRevealed,
+                    onClick = {
+                        selectedAnswer = answer
+                        isAnswerRevealed = true
+
+                        if (answer == goodAnswer) {
+                            InGameVM.addScore(1)
+                        }
+                    }
+                )
+                Spacer(Modifier.height(12.dp))
+            }
         }
     }
 }
 
-// Bouton modifié pour accepter une couleur et un état activé/désactivé
 @Composable
 fun AnswerButton(
     text: String,
     onClick: () -> Unit,
-    backgroundColor: Color = MaterialTheme.colorScheme.primary,
+    containerColor: Color,
+    contentColor: Color,
     enabled: Boolean = true
 ) {
     Button(
         onClick = onClick,
-        enabled = enabled, // Désactive le bouton si on a déjà répondu
+        enabled = enabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = backgroundColor,
-            disabledContainerColor = backgroundColor // Garde la couleur même désactivé
+            containerColor = containerColor,
+            contentColor = contentColor,
+            disabledContainerColor = containerColor,
+            disabledContentColor = contentColor
         ),
-        modifier = Modifier.fillMaxWidth().height(80.dp)
+
+        modifier = Modifier.fillMaxWidth().height(64.dp)
     ) {
-        Text(text, fontSize = 24.sp, color = Color.White)
+        Text(
+            text,
+            style = MaterialTheme.typography.titleLarge,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
+        )
     }
 }
 /*
@@ -423,14 +451,15 @@ fun GameTimer(
     totalTime: Int = 30,
     onTimeFinished: () -> Unit
 ) {
+    // ... Logique du LaunchedEffect inchangée ...
     var timeLeft by remember { mutableIntStateOf(totalTime) }
     val progress = timeLeft / totalTime.toFloat()
-    val animatedProgress by animateFloatAsState(
-        targetValue = progress,
-        label = "ProgressAnimation"
-    )
+    val animatedProgress by animateFloatAsState(targetValue = progress, label = "ProgressAnimation")
 
-    val color = if (timeLeft > 10) Color.Green else Color.Red
+    val themeColor = MaterialTheme.colorScheme.primary
+    val urgentColor = MaterialTheme.colorScheme.error
+
+    val color = if (timeLeft > 10) themeColor else urgentColor
 
     LaunchedEffect(key1 = timeLeft) {
         if (timeLeft > 0) {
@@ -443,27 +472,27 @@ fun GameTimer(
 
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.size(100.dp) // Taille du timer
+        modifier = Modifier.size(120.dp)
     ) {
         CircularProgressIndicator(
             progress = { 1f },
-            modifier = Modifier.size(100.dp),
-            color = Color.LightGray,
-            strokeWidth = 8.dp,
+            modifier = Modifier.size(120.dp),
+            color = MaterialTheme.colorScheme.surfaceVariant,
+            strokeWidth = 10.dp,
         )
 
         CircularProgressIndicator(
             progress = { animatedProgress },
-            modifier = Modifier.size(100.dp),
+            modifier = Modifier.size(120.dp),
             color = color,
-            strokeWidth = 8.dp,
+            strokeWidth = 10.dp,
         )
 
         Text(
             text = "$timeLeft",
-            fontSize = 34.sp,
+            style = MaterialTheme.typography.headlineLarge,
             fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onSurface
+            color = color
         )
     }
 }
