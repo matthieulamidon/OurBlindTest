@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import fr.eseo.b3.mlbcpg.ourblindtest.model.QuestionBlindTest
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
+import fr.eseo.b3.mlbcpg.ourblindtest.model.Theme
 import kotlin.math.min
 
 private data class SongData(
@@ -850,55 +851,49 @@ class ListOfQuestion {
 
     fun generateQuestions(settings: Setting): List<QuestionBlindTest> {
         val gson = Gson()
-
         val itemType = object : TypeToken<List<SongData>>() {}.type
-        val allSongs: List<SongData> = gson.fromJson(QUESTIONS_JSON_DATA, itemType)
 
-        Log.d("allSongs", allSongs.toString())
+        val allSongs: List<SongData> = gson.fromJson(QUESTIONS_JSON_DATA, itemType) ?: emptyList()
 
+        val filteredSongs = allSongs.filter { song ->
 
-        val filteredSongs = allSongs /*.filter { song ->
-            val noThemeFilter = settings.theme == "null" || settings.theme == ""
+            val reqThemeName = settings.theme.name
 
+            val reqSubThemeLabel = settings.subTheme?.label
 
-            val noSubThemeFilter = settings.sbTheme == "null" || settings.sbTheme == ""
+            val hasThemeFilter = settings.theme != Theme.TOUT
+            val hasSubThemeFilter = settings.subTheme != null
 
-            val themeMatches = noThemeFilter || song.theme == settings.theme
-            val subThemeMatches = noSubThemeFilter || song.subTheme == settings.sbTheme
+            when {
+                hasSubThemeFilter -> song.subTheme == reqSubThemeLabel
 
-            themeMatches && subThemeMatches
-        }*/
+                hasThemeFilter -> song.theme == reqThemeName
+
+                else -> true
+            }
+        }
 
 
         val shuffledSongs = filteredSongs.shuffled()
-        val limit = min(settings.nb, shuffledSongs.size)
+        val limit = if (shuffledSongs.isNotEmpty()) min(settings.nb, shuffledSongs.size) else 0
         val selectedSongs = shuffledSongs.take(limit)
 
         val questions = selectedSongs.map { correctSong ->
-
-            // j'adore la manipulation de liste qu'elle enfer
-            // et oui c'est gemini qui ma aider pour ce code car je suis TEUBE
             val wrongAnswers = allSongs
                 .filter { it.name != correctSong.name }
                 .shuffled()
                 .take(3)
                 .map { it.name }
 
-            val wrong1 = wrongAnswers.getOrElse(0) { "ANY Radiance" }
-            val wrong2 = wrongAnswers.getOrElse(1) { "Any Radiance V2" }
-            val wrong3 = wrongAnswers.getOrElse(2) { "Dies Ire, Dies Illa" }
-
-            // On crée votre objet final
             QuestionBlindTest(
                 title = correctSong.name,
                 author = correctSong.author,
-                falseChose1 = wrong1,
-                falseChose2 = wrong2,
-                falseChose3 = wrong3
+                falseChose1 = wrongAnswers.getOrElse(0) { "Lumière" },
+                falseChose2 = wrongAnswers.getOrElse(1) { "Une vie a t'aimer" },
+                falseChose3 = wrongAnswers.getOrElse(2) { "Alicia" }
             )
         }
 
-        Log.d("questions", questions.toString())
         return questions
     }
 }
