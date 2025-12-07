@@ -7,32 +7,48 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AssistChip
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,6 +58,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import fr.eseo.b3.mlbcpg.ourblindtest.R
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
+import fr.eseo.b3.mlbcpg.ourblindtest.model.SubTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepository
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
@@ -68,13 +85,7 @@ fun MainScreen(onStartQuiz: () -> Unit,
         color = MaterialTheme.colorScheme.background
     ) {
         Scaffold (
-            topBar = {
-                OurBlindTestAppBar(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.primary)
-                )
-            },
+            topBar = { OurBlindTestAppBar(modifier = Modifier.fillMaxWidth()) },
             content = { innerPadding ->
                 Column(modifier = Modifier.padding(innerPadding)) {
                     MainScreenContent(
@@ -101,79 +112,135 @@ private fun MainScreenContent(
     ourBlindTestVm: OurBlindTestViewModel
 ) {
     var pseudo by remember { mutableStateOf("") }
-
-    // récupération des scores via le viewModel
     val scoreList by ourBlindTestVm.scores.collectAsState()
+    val currentSetting by inGameVm.setting.collectAsState()
 
-    Card(
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
-        modifier = modifier.padding(16.dp)
+    val nb by remember { mutableIntStateOf(currentSetting.nb) }
+    val theme by remember { mutableStateOf(currentSetting.theme) }
+    val subTheme by remember { mutableStateOf<SubTheme?>(currentSetting.subTheme) }
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .padding(horizontal = 24.dp)
+            .verticalScroll(rememberScrollState()), // sert à ajouter du défilement si l'écran est trop petit
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+
+        Spacer(Modifier.height(16.dp))
+
+        //Carte pour les scores
+        Card(
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+            modifier = Modifier.fillMaxWidth()
         ) {
-            // Affichage du tableau des scores
-            Text(
-                "Tableau des scores",
-                fontSize = 22.sp,
-                fontWeight = FontWeight.Bold
-            )
-
-            Spacer(Modifier.height(16.dp))
-            ScoreTable(scoreList)
-
-            Spacer(Modifier.height(40.dp))
-
-            // Titre
-            Text("Blind Test 🎵", fontSize = 28.sp)
-
-            Spacer(Modifier.height(16.dp))
-
-            // Pseudo
-            TextField(
-                value = pseudo,
-                onValueChange = { pseudo = it },
-                label = { Text("Pseudo") }
-            )
-
-            Spacer(Modifier.height(16.dp))
-
-            // Bouton Start
-            Button(
-                onClick = {
-                    inGameVm.setPseudo(pseudo)
-                    inGameVm.generateListOfQuestion()
-                    onStartQuiz()
-                },
-                modifier = Modifier.fillMaxWidth()
+            Column(
+                modifier = Modifier.padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text("Commencer le quiz")
-            }
-
-            Spacer(Modifier.height(16.dp))
-
-            // Bouton Music Player
-            Button(
-                onClick = { onMusicPlayer() },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Lecteur de musique")
-            }
-
-            Spacer(Modifier.height(32.dp))
-
-            // Settings
-            Button(
-                onClick = {onSettingsBtn()},
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Settings")
+                Text(
+                    stringResource(id = R.string.scores_table),
+                    style = MaterialTheme.typography.titleLarge, // Utilisation de la typographie du thème
+                    fontWeight = FontWeight.SemiBold
+                )
+                Spacer(Modifier.height(12.dp))
+                ScoreTable(scoreList)
             }
         }
+
+        Spacer(Modifier.height(40.dp))
+
+        // Titre du Jeu
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = stringResource(id = R.string.blind_test),
+                style = MaterialTheme.typography.headlineLarge,
+                fontWeight = FontWeight.ExtraBold
+            )
+            Spacer(Modifier.width(12.dp))
+
+            /*Icon(
+                painter = painterResource(id = R.drawable.ic_music_note), // Remplacez par votre ressource
+                contentDescription = "Blind Test Icon",
+                tint = MaterialTheme.colorScheme.primary,
+                modifier = Modifier.size(32.dp)
+            )*/
+        }
+
+        Spacer(Modifier.height(24.dp))
+
+        // Champ Pseudo
+        OutlinedTextField(
+            value = pseudo,
+            onValueChange = { pseudo = it },
+            label = { Text(stringResource(id = R.string.pseudo)) },
+            // On le rend un peu moins large pour un meilleur équilibre visuel
+            modifier = Modifier.fillMaxWidth(0.9f)
+        )
+
+        Spacer(Modifier.height(32.dp))
+
+        //Boutons d'Action
+
+        // Bouton Principal
+        ElevatedButton(
+            onClick = {
+                inGameVm.setPseudo(pseudo)
+                inGameVm.generateListOfQuestion()
+                onStartQuiz()
+            },
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            Text(stringResource(id = R.string.begin_quiz), fontSize = 18.sp)
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        // Boutons Secondaires
+        FilledTonalButton(
+            onClick = { onMusicPlayer() },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(stringResource(id = R.string.music_player))
+        }
+
+        Spacer(Modifier.height(16.dp))
+
+        FilledTonalButton(
+            onClick = { onSettingsBtn() },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(stringResource(id = R.string.settings))
+        }
+
+        Spacer(Modifier.height(40.dp))
+
+        //Affichage des Settings
+        Text(
+            "Paramètres Actuels :",
+            style = MaterialTheme.typography.titleSmall,
+            fontWeight = FontWeight.SemiBold
+        )
+        Spacer(Modifier.height(8.dp))
+
+        FlowRow(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            // chip en flowRow (si ça prends trop de place, ça passe à la ligne suivante)
+            AssistChip(onClick = {}, label = { Text("$nb Questions") })
+            Spacer(Modifier.width(8.dp))
+            AssistChip(onClick = {}, label = { Text("Thème : ${theme.label}") })
+
+            // le sous thème ne s'affiche que s'il est défini
+            if (subTheme != null) {
+                Spacer(Modifier.width(8.dp))
+                AssistChip(onClick = {}, label = { Text("Sous-thème : ${subTheme?.label}") })
+            }
+        }
+
+        Spacer(Modifier.height(24.dp)) // Padding final
     }
 }
 
@@ -183,15 +250,40 @@ fun ScoreTable(scores: List<Score>) {
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.Start
     ) {
-        scores.forEach { score ->
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text("Pseudo", style = MaterialTheme.typography.labelMedium)
+            Text("Score", style = MaterialTheme.typography.labelMedium)
+        }
+        // ligne sous Pseudo et Score
+        HorizontalDivider()
+
+        scores.forEachIndexed { index, score ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                    // ça permet d'alterner entre deux couleurs grâce à l'index
+                    .background(if (index % 2 == 0) MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f) else Color.Transparent)
+                    .padding(horizontal = 8.dp, vertical = 6.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(score.name, fontSize = 18.sp)
-                Text("${score.score} pts", fontSize = 18.sp, fontWeight = FontWeight.Bold)
+                // les trois premiers scores sont mis en valeur (toujours grâce à l'index)
+                Text(
+                    text = score.name,
+                    fontWeight = if (index < 3) FontWeight.SemiBold else FontWeight.Normal,
+                    style = MaterialTheme.typography.bodyMedium
+                )
+                Text(
+                    text = "${score.score} pts",
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.primary,
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }

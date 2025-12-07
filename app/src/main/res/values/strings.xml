@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">OurBlindTest</string>
     <string name="animation">Ici animation de lecture</string>
+    <string name="blind_test">Blind Test 🎵</string>
+    <string name="pseudo">Pseudo</string>
+    <string name="begin_quiz">Commencer le quiz</string>
+    <string name="music_player">Lecteur de musique</string>
+    <string name="settings">Paramètres</string>
+    <string name="scores_table">Tableau des scores</string>
 </resources>
+

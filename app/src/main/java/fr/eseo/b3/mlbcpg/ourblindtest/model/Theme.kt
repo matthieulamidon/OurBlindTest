@@ -11,7 +11,7 @@ enum class Theme(
 
     JEU_VIDEO(
         label = "Jeux vidéo",
-        availableSubThemes = listOf(SubTheme.HOLLOW_KNIGHT, SubTheme.PERSONA)
+        availableSubThemes = listOf(SubTheme.HOLLOW_KNIGHT, SubTheme.SILKSONG, SubTheme.PERSONA, SubTheme.ZELDA)
     ),
 
     ANNEES_2000(
@@ -21,18 +21,14 @@ enum class Theme(
 
     DESSINS_ANIMES(
         label = "Dessins animés",
-        availableSubThemes = listOf(SubTheme.DISNEY, SubTheme.CARTOON_NETWORK)
-    ),
-
-    MUSIQUE_NULLE(
-        label = "Musique nulle",
-        availableSubThemes = emptyList()
+        availableSubThemes = listOf(SubTheme.DISNEY)
     );
 }
 
 enum class SubTheme(val label: String) {
     HOLLOW_KNIGHT("Hollow Knight"),
     DISNEY("Disney"),
-    CARTOON_NETWORK("Cartoon Network"),
-    PERSONA("Persona");
+    SILKSONG("Silksong"),
+    PERSONA("Persona"),
+    ZELDA("The Legend of Zelda");
 }

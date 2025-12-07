@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import fr.eseo.b3.mlbcpg.ourblindtest.model.QuestionBlindTest
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
+import fr.eseo.b3.mlbcpg.ourblindtest.model.Theme
 import kotlin.math.min
 
 private data class SongData(
@@ -347,62 +348,1197 @@ class ListOfQuestion {
                     "theme": "Video Game",
                     "subTheme": "Hollow Knight",
                     "previewUrl": null
+                },
+                {
+                    "id": 42,
+                    "name": "Wake Up, Get Up, Get Out There",
+                    "author": "Lyn Inaizumi",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 43,
+                    "name": "Life Will Change",
+                    "author": "Lyn Inaizumi",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 44,
+                    "name": "Last Surprise",
+                    "author": "Lyn Inaizumi",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 45,
+                    "name": "Beneath the Mask -instrumental version-",
+                    "author": "ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 46,
+                    "name": "Rivers In the Desert",
+                    "author": "Lyn Inaizumi",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 47,
+                    "name": "Full Moon Full Life",
+                    "author": "Lotus Juice / Azumi Takahashi / ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 48,
+                    "name": "Mass Destruction -Reload-",
+                    "author": "Lotus Juice / Azumi Takahashi / ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 49,
+                    "name": "When The Moon's Reaching Out Stars -Reload-",
+                    "author": "Azumi Takahashi",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 50,
+                    "name": "Pursuing My True Self",
+                    "author": "平田志穂子",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 51,
+                    "name": "I'll Face Myself -Battle-",
+                    "author": "アトラスサウンドチーム",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 52,
+                    "name": "Never More",
+                    "author": "平田志穂子",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 53,
+                    "name": "Aria of the Soul (P3R ver.)",
+                    "author": "ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 54,
+                    "name": "Your Affection",
+                    "author": "平田志穂子",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 55,
+                    "name": "Time To Make History",
+                    "author": "平田志穂子",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 56,
+                    "name": "Heaven",
+                    "author": "平田志穂子",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 57,
+                    "name": "Heartbeat, Heartbreak",
+                    "author": "平田志穂子",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 58,
+                    "name": "Color Your Night",
+                    "author": "Lotus Juice",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 59,
+                    "name": "Reach Out To The Truth",
+                    "author": "平田志穂子",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 60,
+                    "name": "Our Beginning",
+                    "author": "ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 61,
+                    "name": "Regret",
+                    "author": "ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 62,
+                    "name": "Will Power",
+                    "author": "ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 63,
+                    "name": "Layer Cake",
+                    "author": "ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 64,
+                    "name": "Throw Away Your Mask",
+                    "author": "Lyn Inaizumi",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 65,
+                    "name": "Libérée, délivrée",
+                    "author": "Anaïs Delva",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 66,
+                    "name": "Ce rêve bleu",
+                    "author": "Karine Costa, Paolo Domingo",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 67,
+                    "name": "L'Histoire De La Vie",
+                    "author": "Debbie Davis",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 68,
+                    "name": "Comme un homme",
+                    "author": "Patrick Fiori, José Garcia, Thierry Ragueneau",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 69,
+                    "name": "Sous l'océan",
+                    "author": "Henri Salvador",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 70,
+                    "name": "Je Voudrais Déjà Être Roi",
+                    "author": "Dimitri Rougeul, Michel Prudhomme",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 71,
+                    "name": "Ne parlons pas de Bruno",
+                    "author": "Sharon Laloum, Julian Ortiz Cardona",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 72,
+                    "name": "Où est la vraie vie ?",
+                    "author": "Maeva Méline",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 73,
+                    "name": "Hakuna Matata",
+                    "author": "Dimitri Rougeul, Emmanuel Curtil, Jean-Philippe Puymartin",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 74,
+                    "name": "Il En Faut Peu Pour Être Heureux",
+                    "author": "Jean Stout, Pascal Bressy",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 75,
+                    "name": "Partir là-bas",
+                    "author": "Claire Guyot",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 76,
+                    "name": "L'air Du Vent",
+                    "author": "Laura Mayne",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
+                    "previewUrl": null
+                },
+                {
+                    "id": 77,
+                    "name": "Femme Like U",
+                    "author": "K-Maro",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 78,
+                    "name": "La Boulette (Génération Nan Nan)",
+                    "author": "Diam's",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 79,
+                    "name": "Temperature",
+                    "author": "Sean Paul",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 80,
+                    "name": "Umbrella",
+                    "author": "Rihanna, JAY Z",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 81,
+                    "name": "Hips Don't Lie (feat. Wyclef Jean)",
+                    "author": "Shakira, Wyclef Jean",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 82,
+                    "name": "En apesanteur",
+                    "author": "Calogero",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 83,
+                    "name": "Dernière danse",
+                    "author": "Kyo",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 84,
+                    "name": "Crazy In Love (feat. JAY-Z)",
+                    "author": "Beyoncé, JAY Z",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 85,
+                    "name": "Toxic",
+                    "author": "Britney Spears",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 86,
+                    "name": "J'ai demandé à la lune",
+                    "author": "Indochine",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 87,
+                    "name": "Love Don't Let Me Go",
+                    "author": "David Guetta",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 88,
+                    "name": "Moi... Lolita",
+                    "author": "Alizée",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 89,
+                    "name": "I Gotta Feeling",
+                    "author": "Black Eyed Peas",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 90,
+                    "name": "Poker Face",
+                    "author": "Lady Gaga",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 91,
+                    "name": "Single Ladies (Put a Ring on It)",
+                    "author": "Beyoncé",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 92,
+                    "name": "Hot N Cold",
+                    "author": "Katy Perry",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 93,
+                    "name": "Get the Party Started",
+                    "author": "P!nk",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 94,
+                    "name": "Mr. Brightside",
+                    "author": "The Killers",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 95,
+                    "name": "One More Time",
+                    "author": "Daft Punk",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 96,
+                    "name": "Hey Ya!",
+                    "author": "Outkast",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 97,
+                    "name": "Rehab",
+                    "author": "Amy Winehouse",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 98,
+                    "name": "Chasing Cars",
+                    "author": "Snow Patrol",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 99,
+                    "name": "Shut Up",
+                    "author": "Black Eyed Peas",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 100,
+                    "name": "Ma philosophie",
+                    "author": "Amel Bent",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 101,
+                    "name": "Le vent nous portera",
+                    "author": "Noir Désir",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 102,
+                    "name": "J't'emmène au vent",
+                    "author": "Louise Attaque",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 103,
+                    "name": "Alive",
+                    "author": "Empire of the Sun",
+                    "theme": "ANNEES_2000",
+                    "subTheme": null,
+                    "previewUrl": null
+                },
+                {
+                    "id": 104,
+                    "name": "Signs Of Love",
+                    "author": "平田志穂子",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 105,
+                    "name": "Like a dream come true",
+                    "author": "アトラスサウンドチーム",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 106,
+                    "name": "SMILE",
+                    "author": "アトラスサウンドチーム",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 107,
+                    "name": "specialist",
+                    "author": "アトラスサウンドチーム",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                 {
+                    "id": 108,
+                    "name": "Period",
+                    "author": "アトラスサウンドチーム",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 109,
+                    "name": "The Genesis",
+                    "author": "アトラスサウンドチーム",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 110,
+                    "name": "Game",
+                    "author": "アトラスサウンドチーム",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 111,
+                    "name": "Take Over",
+                    "author": "Lyn Inaizumi",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 112,
+                    "name": "Ideal and the Real",
+                    "author": "ATLUS Sound Team",
+                    "theme": "Video Game",
+                    "subTheme": "Persona",
+                    "previewUrl": null
+                },
+                {
+                    "id": 113,
+                    "name": "Enter Pharloom",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 114,
+                    "name": "Moss Grotto",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 115,
+                    "name": "Strive",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 116,
+                    "name": "Bone Bottom",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 117,
+                    "name": "The Marrow",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 118,
+                    "name": "Bell Beast",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 119,
+                    "name": "Repose",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 120,
+                    "name": "Deep Docks",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 121,
+                    "name": "Lace",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 122,
+                    "name": "Far Fields",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 123,
+                    "name": "Fourth Chorus",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 124,
+                    "name": "Greymoor",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 125,
+                    "name": "Incisive Battle",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 126,
+                    "name": "Bellhart",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 127,
+                    "name": "Widow",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 128,
+                    "name": "Shellwood",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 129,
+                    "name": "Sister Splinter",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 130,
+                    "name": "Hunter's Trail",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 131,
+                    "name": "Sinner's Road",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 132,
+                    "name": "Cut Through",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                 {
+                    "id": 133,
+                    "name": "Bilewater",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 134,
+                    "name": "The Mist",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 135,
+                    "name": "Phantom",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 136,
+                    "name": "The Slab",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 137,
+                    "name": "Red Maiden",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 138,
+                    "name": "Mount Fay",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 139,
+                    "name": "Blasted Steps",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 140,
+                    "name": "Last Judge",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 141,
+                    "name": "Underworks",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 142,
+                    "name": "Choral Chambers",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 143,
+                    "name": "Songclave",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 144,
+                    "name": "Cogwork Dancers",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 145,
+                    "name": "Cogwork Core",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 146,
+                    "name": "Whispering Vaults",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 147,
+                    "name": "Trobbio",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 148,
+                    "name": "Hight Halls",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 149,
+                    "name": "The Choir",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 150,
+                    "name": "Awakening",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 151,
+                    "name": "Dark Descent",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 152,
+                    "name": "Reprive",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 153,
+                    "name": "Nyleth",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 154,
+                    "name": "Silksong",
+                    "author": "Christopher Larkin",
+                    "theme": "Video Game",
+                    "subTheme": "Silksong",
+                    "previewUrl": null
+                },
+                {
+                    "id": 155,
+                    "name": "The Legend of Zelda: Main Theme",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 156,
+                    "name": "Gerudo Valley",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 157,
+                    "name": "Great Fairy Fountain",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 158,
+                    "name": "Song of Storms",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 159,
+                    "name": "Breath of the Wild (Main Theme)",
+                    "author": "Manaka Kataoka",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 160,
+                    "name": "Dragon Roost Island",
+                    "author": "Kenta Nagata",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 161,
+                    "name": "Zelda's Lullaby",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 162,
+                    "name": "Lost Woods",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 163,
+                    "name": "Song of Healing",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 164,
+                    "name": "Midna's Lament",
+                    "author": "Toru Minegishi",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 165,
+                    "name": "Dark World Theme",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 166,
+                    "name": "Ballad of the Goddess",
+                    "author": "Hajime Wakai",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 167,
+                    "name": "Epona's Song",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 168,
+                    "name": "Kakariko Village",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 169,
+                    "name": "The Great Sea",
+                    "author": "Kenta Nagata",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 170,
+                    "name": "Hyrule Castle",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 171,
+                    "name": "Temple of Time",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 172,
+                    "name": "Molgera",
+                    "author": "Kenta Nagata",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 173,
+                    "name": "Ballad of the Wind Fish",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 174,
+                    "name": "Sheik's Theme",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 175,
+                    "name": "Clock Town",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 176,
+                    "name": "Saria's Song",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 177,
+                    "name": "Song of Time",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 178,
+                    "name": "Spirit Tracks (Main Theme)",
+                    "author": "Toru Minegishi",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 179,
+                    "name": "Skyloft",
+                    "author": "Takeshi Hama",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 180,
+                    "name": "Fi's Farewell",
+                    "author": "Takeshi Hama",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 181,
+                    "name": "Hyrule Field",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                {
+                    "id": 182,
+                    "name": "Minuet of Forest",
+                    "author": "Koji Kondo",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
                 }
         ]
         """
     }
 
+    // et oui c'est toute la logic de l'app qui marche et surtout previewUrl ne sert à rien et oui j'ai la flem de l'enlever
     fun generateQuestions(settings: Setting): List<QuestionBlindTest> {
         val gson = Gson()
-
         val itemType = object : TypeToken<List<SongData>>() {}.type
-        val allSongs: List<SongData> = gson.fromJson(QUESTIONS_JSON_DATA, itemType)
 
-        Log.d("allSongs", allSongs.toString())
+        val allSongs: List<SongData> = gson.fromJson(QUESTIONS_JSON_DATA, itemType) ?: emptyList()
 
+        // filtre a bonne reponse
+        val filteredSongs = allSongs.filter { song ->
+            val reqThemeName = settings.theme.name
+            val reqSubThemeLabel = settings.subTheme?.label
+            val hasThemeFilter = settings.theme != Theme.TOUT
+            val hasSubThemeFilter = settings.subTheme != null
 
-        val filteredSongs = allSongs /*.filter { song ->
-            val noThemeFilter = settings.theme == "null" || settings.theme == ""
+            when {
+                hasSubThemeFilter -> song.subTheme == reqSubThemeLabel
+                hasThemeFilter -> song.theme == reqThemeName
+                else -> true
+            }
+        }
 
-
-            val noSubThemeFilter = settings.sbTheme == "null" || settings.sbTheme == ""
-
-            val themeMatches = noThemeFilter || song.theme == settings.theme
-            val subThemeMatches = noSubThemeFilter || song.subTheme == settings.sbTheme
-
-            themeMatches && subThemeMatches
-        }*/
-
+        // filtre secu si pas asser de bonne réponse et oui j'ai fait ça pour toi barth
+        val sameThemeSongs = if (settings.theme != Theme.TOUT) {
+            allSongs.filter { it.theme == settings.theme.name }
+        } else {
+            allSongs
+        }
 
         val shuffledSongs = filteredSongs.shuffled()
-        val limit = min(settings.nb, shuffledSongs.size)
+        val limit = if (shuffledSongs.isNotEmpty()) min(settings.nb, shuffledSongs.size) else 0
         val selectedSongs = shuffledSongs.take(limit)
 
         val questions = selectedSongs.map { correctSong ->
 
-            // j'adore la manipulation de liste qu'elle enfer
-            // et oui c'est gemini qui ma aider pour ce code car je suis TEUBE
-            val wrongAnswers = allSongs
-                .filter { it.name != correctSong.name }
+            var potentialWrongAnswers = filteredSongs.filter { it.name != correctSong.name }
+
+            if (potentialWrongAnswers.size < 3) {
+                potentialWrongAnswers = sameThemeSongs.filter { it.name != correctSong.name }
+            }
+
+            if (potentialWrongAnswers.size < 3) {
+                potentialWrongAnswers = allSongs.filter { it.name != correctSong.name }
+            }
+
+            val wrongAnswers = potentialWrongAnswers
                 .shuffled()
                 .take(3)
                 .map { it.name }
 
-            val wrong1 = wrongAnswers.getOrElse(0) { "ANY Radiance" }
-            val wrong2 = wrongAnswers.getOrElse(1) { "Any Radiance V2" }
-            val wrong3 = wrongAnswers.getOrElse(2) { "Dies Ire, Dies Illa" }
-
-            // On crée votre objet final
             QuestionBlindTest(
                 title = correctSong.name,
                 author = correctSong.author,
-                falseChose1 = wrong1,
-                falseChose2 = wrong2,
-                falseChose3 = wrong3
+                falseChose1 = wrongAnswers.getOrElse(0) { "Lumière" },
+                falseChose2 = wrongAnswers.getOrElse(1) { "Une vie a t'aimer" },
+                falseChose3 = wrongAnswers.getOrElse(2) { "Alicia" }
             )
         }
-
-        Log.d("questions", questions.toString())
+        // tkt ça marche enfin je crois euh ...
         return questions
     }
 }
