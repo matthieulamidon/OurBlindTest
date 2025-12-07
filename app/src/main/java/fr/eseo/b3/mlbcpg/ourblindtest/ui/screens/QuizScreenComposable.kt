@@ -1,9 +1,7 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
-import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -35,12 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import fr.eseo.b3.mlbcpg.ourblindtest.model.QuestionBlindTest
-import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
-import fr.eseo.b3.mlbcpg.ourblindtest.ui.theme.OurBlindTestTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import kotlinx.coroutines.delay
 import androidx.compose.runtime.collectAsState
@@ -48,145 +41,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.style.TextOverflow
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.DeezerViewModel
 
-/*
-@Composable
-fun QuizScreen(onFinish: () -> Unit ,onStartQuiz: () -> Unit, InGameVM : InGameViewModel)
-    {
-        //val ViewModelInGame = InGameViewModel(InGameRepositoryListImpl())
-        val question: QuestionBlindTest? by InGameVM.question.collectAsState()
-
-        val shuffledAnswers = remember(question) {
-            if (question != null) {
-                listOf(
-                    question?.title,
-                    question?.falseChose1,
-                    question?.falseChose2,
-                    question?.falseChose3
-                ).shuffled()
-            } else {
-                emptyList()
-            }
-        }
-
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .statusBarsPadding(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Scaffold (
-            topBar = {
-                OurBlindTestAppBar(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(MaterialTheme.colorScheme.primary)
-                )
-            },
-            content = { innerPadding ->
-                Column(modifier = Modifier.padding(innerPadding)) {
-                    QuizScreenContent(
-                        modifier = Modifier.fillMaxWidth(),
-                        onStartQuiz = onStartQuiz,
-                        onFinish = onFinish,
-
-                        answers = shuffledAnswers as List<String>,
-                        InGameVM = InGameVM
-                    )
-                }
-            }
-        )
-    }
-}
-
-@Composable
-private fun QuizScreenContent(
-    modifier: Modifier,
-    answers: List<String>,
-    onStartQuiz: () -> Unit,
-    onFinish: () -> Unit,
-    InGameVM: InGameViewModel
-) {
-    val question: QuestionBlindTest? by InGameVM.question.collectAsState()
-    val goodAnswer: String? = question?.title
-    val currentQuestion = InGameVM.currentQuestion
-
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-
-        // Zone Timer + Animation
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            contentAlignment = Alignment.Center
-        ) {
-            Text(
-                text = "score : ${InGameVM.score.collectAsState().value}",
-                fontSize = 30.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                modifier = Modifier.padding(horizontal = 12.dp)
-            )
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 4.dp),
-                horizontalArrangement = Arrangement.SpaceBetween) {
-                Text("Animation ici", fontSize = 18.sp)
-                GameTimer(30, onTimeFinished = {
-                    //viewModel.answerCorrect()
-                    onStartQuiz()
-                })
-            }
-        }
-
-        // Question
-        Text(
-            text = "quelle est le nom de cette musique",
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(horizontal = 12.dp)
-        )
-
-        Spacer(Modifier.height(40.dp))
-
-        // Réponses
-        answers.forEach { answer ->
-            AnswerButton(
-                text = answer,
-                onClick = {
-                    response(onStartQuiz,onFinish, InGameVM, goodAnswer, answer)
-                }
-            )
-            Spacer(Modifier.height(20.dp))
-        }
-    }
-}
-
-
-@Composable
-fun AnswerButton(text: String, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-    ) {
-        Text(text, fontSize = 24.sp)
-    }
-}
-*/
 @Composable
 fun QuizScreen(onFinish: () -> Unit, onStartQuiz: () -> Unit, DeezerVM: DeezerViewModel, InGameVM: InGameViewModel) {
 
     val question by InGameVM.question.collectAsState()
 
+    //chargement de la question en dans le composant
     val shuffledAnswers = remember(question) {
         if (question != null) {
             listOf(
@@ -240,24 +100,22 @@ private fun QuizScreenContent(
     InGameVM.getNextQuestion()
     Log.d("ReponseBT", questionState?.title ?: "eeeeee")
 
+    //lance la preview de la musique
     LaunchedEffect(Unit) {
-        DeezerVM.searchTrack(questionState?.title ?: "", /*questionState?.author ?: */null) {}
+        DeezerVM.searchTrack(questionState?.title ?: "", questionState?.author ?: null) {}
     }
 
 
 
-    // NOUVEAUX ÉTATS POUR GÉRER L'UI ET LE DÉLAI
+    // état de la machine : en mode réponse ou non ? si reponse alors en vert la bonne reponse e t le reste en roufge
     var isAnswerRevealed by remember { mutableStateOf(false) } // Est-ce qu'on a cliqué ?
     var selectedAnswer by remember { mutableStateOf<String?>(null) } // Quel bouton a été cliqué ?
 
-    // Logique de transition (Délai de 3 secondes)
+    // Logique de transition avec delai de 3 secondes
     if (isAnswerRevealed) {
         LaunchedEffect(Unit) {
-            delay(3000L) // On attend 3 secondes
+            delay(3000L)
 
-            // Vérification : Est-ce la fin du jeu ?
-            // On suppose que setting.nb est le nombre TOTAL de questions
-            // et currentQuestion est l'index actuel (commençant souvent à 0 ou 1, à adapter selon ta logique VM)
             val totalQuestions = InGameVM.setting.value.nb
             val currentIndex = InGameVM.currentQuestion.value
 
@@ -265,13 +123,14 @@ private fun QuizScreenContent(
             isAnswerRevealed = false
             selectedAnswer = null
 
+            // Vérifier si c'est la dernière question pour sortir de la boucle
             if ( (currentIndex + 1) < totalQuestions) {
                 // Il reste des questions
                 InGameVM.nextQuestion()
                 DeezerVM.playPause()
                 onStartQuiz() // Recharge la vue ou navigue vers soi-même
             } else {
-                // C'est fini
+                // C'est fini les amies
 
                 DeezerVM.playPause()
                 onFinish()
@@ -282,9 +141,9 @@ private fun QuizScreenContent(
     Column(
         modifier = modifier.fillMaxSize().padding(horizontal = 24.dp).verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween // Utilisé pour pousser le contenu en haut/bas
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
-        // --- 1. EN-TÊTE : Score et Question ---
+
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
 
             // Score et Numéro de Question (Haut de l'écran)
@@ -406,46 +265,6 @@ fun AnswerButton(
         )
     }
 }
-/*
-@SuppressLint("ViewModelConstructorInComposable")
-@Preview(showBackground = true)
-@Composable
-fun QuizScreenPreview() {
-    OurBlindTestTheme {
-        val ViewModelInGame = InGameViewModel(InGameRepositoryListImpl())
-        val question: QuestionBlindTest? by ViewModelInGame.question.collectAsState()
-
-
-        val shuffledAnswers = remember(question) {
-            if (question != null) {
-                listOf(
-                    question?.title,
-                    question?.falseChose1,
-                    question?.falseChose2,
-                    question?.falseChose3
-                ).shuffled()
-            } else {
-                emptyList()
-            }
-        }
-
-
-        OurBlindTestAppBar(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(MaterialTheme.colorScheme.primary)
-        )
-        QuizScreenContent(
-            modifier = Modifier.fillMaxWidth(),
-            onStartQuiz = {},
-            answers = shuffledAnswers as List<String>,
-            InGameVM = ViewModelInGame,
-            onFinish = {},
-            DeezerVM = DeezerViewModel()
-        )
-    }
-}*/
-
 @Composable
 fun GameTimer(
     totalTime: Int = 30,
