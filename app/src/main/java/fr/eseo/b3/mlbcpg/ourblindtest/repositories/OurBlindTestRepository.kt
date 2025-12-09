@@ -8,7 +8,7 @@ interface OurBlindTestRepository {
 
     suspend fun addOrUpdateScore(score : Score) //ok
 
-    suspend fun getScoreById(scoreId : String) : Score?//ok
+    suspend fun getScoreById(scoreId : Int) : Score?//ok
 
     suspend fun deleteScore(score : Score)//ok
 }

@@ -10,16 +10,27 @@ class OurBlindTestRepositoriesRoomImp(application: Application) : OurBlindTestRe
     private val db = OurBlindTestDatabaseProvider.getDatabase(application)
     private val scoreDao = db.ScoreTableDao()
 
+    private val scoreLimit = 5
 
     override suspend fun addOrUpdateScore(score: Score) {
         scoreDao.insert(score)
+
+        val allScores = scoreDao.getAllScore()
+
+        if (allScores.size > scoreLimit) { // s'il y a plus de 5 scores, supprime le moins bon
+            val scoresToDelete = allScores.subList(scoreLimit, allScores.size)
+
+            scoresToDelete.forEach { scoreToDelete ->
+                scoreDao.delete(scoreToDelete)
+            }
+        }
     }
 
     override suspend fun getAllScore(): List<Score> {
         return scoreDao.getAllScore()
     }
 
-    override suspend fun getScoreById(scoreId: String): Score? {
+    override suspend fun getScoreById(scoreId: Int): Score? {
         return scoreDao.getNoteById(scoreId)
     }
 

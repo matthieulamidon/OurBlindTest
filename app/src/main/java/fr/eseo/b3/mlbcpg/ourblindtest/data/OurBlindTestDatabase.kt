@@ -7,7 +7,7 @@ import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
 
 @Database(
     entities = [Score::class],
-    version = 1
+    version = 2
 )
 @TypeConverters(OurBlindTestConverters::class)
 abstract class OurBlindTestDatabase  : RoomDatabase() {

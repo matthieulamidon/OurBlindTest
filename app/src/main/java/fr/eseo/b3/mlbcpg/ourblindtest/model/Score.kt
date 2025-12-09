@@ -7,8 +7,9 @@ import java.time.LocalDateTime
 
 @Entity(tableName = "score_table")
 data class Score(
-    @PrimaryKey var id: String = "",
-    var name: String = "",
-    var score: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    var name: String,
+    var score: Int,
     val creationDate: LocalDateTime = LocalDateTime.now()
 )

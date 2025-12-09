@@ -160,12 +160,6 @@ private fun MainScreenContent(
             )
             Spacer(Modifier.width(12.dp))
 
-            /*Icon(
-                painter = painterResource(id = R.drawable.ic_music_note), // Remplacez par votre ressource
-                contentDescription = "Blind Test Icon",
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(32.dp)
-            )*/
         }
 
         Spacer(Modifier.height(24.dp))
@@ -299,7 +293,7 @@ class FakeRepo : OurBlindTestRepository {
 
     override suspend fun addOrUpdateScore(score: Score) {}
     override suspend fun deleteScore(score: Score) {}
-    override suspend fun getScoreById(id: String) = null
+    override suspend fun getScoreById(id: Int) = null
 }
 
 @SuppressLint("ViewModelConstructorInComposable")

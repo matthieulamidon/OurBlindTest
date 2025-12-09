@@ -11,17 +11,17 @@ import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
 
 @Dao
 interface ScoreTableDao {
-    @Query("SELECT * FROM score_table")
+    @Query("SELECT * FROM score_table ORDER BY score DESC")
     fun getAllScore(): List<Score>
 
     @Query("SELECT * FROM score_table WHERE id = :scoreId")
-    suspend fun getNoteById(scoreId : String) : Score?
+    suspend fun getNoteById(scoreId : Int) : Score?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(score : Score) : Long
 
     @Query("DELETE FROM score_table WHERE id = :scoreId")
-    suspend fun deleteNoteById(scoreId : String)
+    suspend fun deleteNoteById(scoreId : Int)
 
     @Update
     suspend fun update(score: Score)

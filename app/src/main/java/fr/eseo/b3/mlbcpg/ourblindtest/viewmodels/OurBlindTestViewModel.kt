@@ -37,10 +37,11 @@ class OurBlindTestViewModel (val repository : OurBlindTestRepository): ViewModel
             withContext(Dispatchers.IO) {
                 repository.addOrUpdateScore(score)
             }
+            refreshScores()
         }
     }
 
-    fun getscoreById(scoreId : String) {
+    fun getscoreById(scoreId : Int) {
         viewModelScope.launch {
             val result = withContext(Dispatchers.IO) {
                 repository.getScoreById(scoreId)

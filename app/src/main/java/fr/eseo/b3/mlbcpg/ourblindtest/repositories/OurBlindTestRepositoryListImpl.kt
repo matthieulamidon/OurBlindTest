@@ -21,7 +21,7 @@ class OurBlindTestRepositoryListImpl : OurBlindTestRepository {
         }
     }
 
-    override suspend fun getScoreById(scoreId: String): Score? {
+    override suspend fun getScoreById(scoreId: Int): Score? {
         return scoreTable.find{it.id == scoreId}
     }
 

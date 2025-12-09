@@ -167,6 +167,7 @@ private fun SettingsScreenContent(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
+                    /*
                     FilterChip(
                         selected = subTheme == null,
                         onClick = { subTheme = null },
@@ -177,7 +178,7 @@ private fun SettingsScreenContent(
                             }
                         }
                     )
-
+                    */
                     theme.availableSubThemes.forEach { currentSubTheme ->
                         FilterChip(
                             selected = subTheme == currentSubTheme,

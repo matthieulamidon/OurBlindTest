@@ -13,7 +13,8 @@ object OurBlindTestDatabaseProvider {
                 context = context.applicationContext,
                 klass = OurBlindTestDatabase::class.java,
                 name  = "our_blind_test_database"
-            ).build()
+            ).fallbackToDestructiveMigration() // version pas très propre mais plus rapide pour mettre à jour la structure de la database
+            .build()
             INSTANCE = instance
             instance
         }

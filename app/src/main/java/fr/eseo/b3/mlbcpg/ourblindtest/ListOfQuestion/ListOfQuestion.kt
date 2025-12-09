@@ -231,122 +231,122 @@ class ListOfQuestion {
                 },
                 {
                     "id": 27,
-                    "name": "Hive Knight",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Ce rêve bleu",
+                    "author": "Karine Costa",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 28,
-                    "name": "Truth, Beauty and Hatred",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Un Poco Loco",
+                    "author": "Andrea Santamaria",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 29,
-                    "name": "Nightmare Lantern (Interlude)",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Je Suis Ton Ami",
+                    "author": "CharlElie Couture",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 30,
-                    "name": "The Grimm Troupe",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Le bleu lumière",
+                    "author": "Cerise Calixte",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 31,
-                    "name": "Nightmare King",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Nuits d'Arabie",
+                    "author": "Bernard Alane",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 32,
-                    "name": "White Defender",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "De Zéro en Héros",
+                    "author": "Mimi Felixine",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 33,
-                    "name": "Dreamers",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Le Festin",
+                    "author": "Camille",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 34,
-                    "name": "Pale Court",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Un jour, mon prince viendra",
+                    "author": "Rachel Pignot",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 35,
-                    "name": "Gods & Glory",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Joyeux non-anniversaire",
+                    "author": "Cast of Alice in Wonderland",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 36,
-                    "name": "Daughter of Hallownest",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Les Cloches de Notre-Dame",
+                    "author": "Bernard Alane",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 37,
-                    "name": "Godhome",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Monsters, Inc.",
+                    "author": "Randy Newman",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 38,
-                    "name": "Sisters of Battle",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Gospel",
+                    "author": "MarchFourth",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 39,
-                    "name": "Haunted Foes",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "Rien qu'un Jour",
+                    "author": "Francis Lalanne",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 40,
-                    "name": "Furious Gods",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "On My Way",
+                    "author": "Phil Collins",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 41,
-                    "name": "Pure Vessel",
-                    "author": "Christopher Larkin",
-                    "theme": "Video Game",
-                    "subTheme": "Hollow Knight",
+                    "name": "It's A Small World (Disneyland Paris version)",
+                    "author": "Cast - Disneyland Paris",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
@@ -559,8 +559,8 @@ class ListOfQuestion {
                 },
                 {
                     "id": 68,
-                    "name": "Comme un homme",
-                    "author": "Patrick Fiori, José Garcia, Thierry Ragueneau",
+                    "name": "You're Welcome",
+                    "author": "Dwayne Johnson",
                     "theme": "Dessins Animés",
                     "subTheme": "Disney",
                     "previewUrl": null
@@ -775,7 +775,7 @@ class ListOfQuestion {
                 },
                 {
                     "id": 95,
-                    "name": "One More Time",
+                    "name": "Veridis Quo",
                     "author": "Daft Punk",
                     "theme": "ANNEES_2000",
                     "subTheme": null,
@@ -1199,7 +1199,7 @@ class ListOfQuestion {
                 },
                 {
                     "id": 148,
-                    "name": "Hight Halls",
+                    "name": "High Halls",
                     "author": "Christopher Larkin",
                     "theme": "Video Game",
                     "subTheme": "Silksong",
@@ -1231,7 +1231,7 @@ class ListOfQuestion {
                 },
                 {
                     "id": 152,
-                    "name": "Reprive",
+                    "name": "Reprieve",
                     "author": "Christopher Larkin",
                     "theme": "Video Game",
                     "subTheme": "Silksong",
@@ -1255,8 +1255,8 @@ class ListOfQuestion {
                 },
                 {
                     "id": 155,
-                    "name": "The Legend of Zelda: Main Theme",
-                    "author": "Koji Kondo",
+                    "name": "The Legend of Zelda Theme",
+                    "author": "Video Games Players",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1264,7 +1264,7 @@ class ListOfQuestion {
                 {
                     "id": 156,
                     "name": "Gerudo Valley",
-                    "author": "Koji Kondo",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1280,15 +1280,15 @@ class ListOfQuestion {
                 {
                     "id": 158,
                     "name": "Song of Storms",
-                    "author": "Koji Kondo",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 159,
-                    "name": "Breath of the Wild (Main Theme)",
-                    "author": "Manaka Kataoka",
+                    "name": "Breath of the Wild",
+                    "author": "Rozen",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1296,7 +1296,7 @@ class ListOfQuestion {
                 {
                     "id": 160,
                     "name": "Dragon Roost Island",
-                    "author": "Kenta Nagata",
+                    "author": "PPF",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1304,7 +1304,7 @@ class ListOfQuestion {
                 {
                     "id": 161,
                     "name": "Zelda's Lullaby",
-                    "author": "Koji Kondo",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1312,7 +1312,7 @@ class ListOfQuestion {
                 {
                     "id": 162,
                     "name": "Lost Woods",
-                    "author": "Koji Kondo",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1320,39 +1320,39 @@ class ListOfQuestion {
                 {
                     "id": 163,
                     "name": "Song of Healing",
-                    "author": "Koji Kondo",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 164,
-                    "name": "Midna's Lament",
-                    "author": "Toru Minegishi",
+                    "name": "Bolero Of Fire",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 165,
-                    "name": "Dark World Theme",
-                    "author": "Koji Kondo",
-                    "theme": "Video Game",
-                    "subTheme": "The Legend of Zelda",
+                    "name": "Je Veux Savoir",
+                    "author": "Phill Collins",
+                    "theme": "Dessins Animés",
+                    "subTheme": "Disney",
                     "previewUrl": null
                 },
                 {
                     "id": 166,
                     "name": "Ballad of the Goddess",
-                    "author": "Hajime Wakai",
+                    "author": "Rozen",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 167,
-                    "name": "Epona's Song",
-                    "author": "Koji Kondo",
+                    "name": "Kotake Koume Theme",
+                    "author": "The Generous Margins",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1360,39 +1360,39 @@ class ListOfQuestion {
                 {
                     "id": 168,
                     "name": "Kakariko Village",
-                    "author": "Koji Kondo",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 169,
-                    "name": "The Great Sea",
-                    "author": "Kenta Nagata",
+                    "name": "The Legend Of Zelda: The Windwaker - The Great Sea",
+                    "author": "Ben Morfitt (SquidPhysics)",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 170,
-                    "name": "Hyrule Castle",
-                    "author": "Koji Kondo",
+                    "name": "Tarrey Town",
+                    "author": "Rozen",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 171,
-                    "name": "Temple of Time",
-                    "author": "Koji Kondo",
+                    "name": 'Temple of Time (From "The Legend of Zelda: Ocarina of Time")',
+                    "author": "Video Game Players",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 172,
-                    "name": "Molgera",
-                    "author": "Kenta Nagata",
+                    "name": 'Molgera (From "The Wind Waker")',
+                    "author": "Julia Henderson",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1400,7 +1400,7 @@ class ListOfQuestion {
                 {
                     "id": 173,
                     "name": "Ballad of the Wind Fish",
-                    "author": "Koji Kondo",
+                    "author": "Rozen",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1408,39 +1408,39 @@ class ListOfQuestion {
                 {
                     "id": 174,
                     "name": "Sheik's Theme",
-                    "author": "Koji Kondo",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 175,
-                    "name": "Clock Town",
-                    "author": "Koji Kondo",
+                    "name": "Clock Town Theme",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 176,
-                    "name": "Saria's Song",
-                    "author": "Koji Kondo",
+                    "name": "Lost Woods",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 177,
-                    "name": "Song of Time",
-                    "author": "Koji Kondo",
+                    "name": "Temple Of Time",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
                 },
                 {
                     "id": 178,
-                    "name": "Spirit Tracks (Main Theme)",
-                    "author": "Toru Minegishi",
+                    "name": "Spirit Tracks Realm Overworld",
+                    "author": "Orenji Music",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1448,7 +1448,7 @@ class ListOfQuestion {
                 {
                     "id": 179,
                     "name": "Skyloft",
-                    "author": "Takeshi Hama",
+                    "author": "Rozen",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1456,7 +1456,7 @@ class ListOfQuestion {
                 {
                     "id": 180,
                     "name": "Fi's Farewell",
-                    "author": "Takeshi Hama",
+                    "author": "Monsalve",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1464,7 +1464,7 @@ class ListOfQuestion {
                 {
                     "id": 181,
                     "name": "Hyrule Field",
-                    "author": "Koji Kondo",
+                    "author": "Dark-Grunt",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1472,7 +1472,15 @@ class ListOfQuestion {
                 {
                     "id": 182,
                     "name": "Minuet of Forest",
-                    "author": "Koji Kondo",
+                    "author": "The Marcus Hedges Trend Orchestra",
+                    "theme": "Video Game",
+                    "subTheme": "The Legend of Zelda",
+                    "previewUrl": null
+                },
+                 {
+                    "id": 183,
+                    "name": "Forest Temple",
+                    "author": "The Marcus Hedges Trend Orchestra",
                     "theme": "Video Game",
                     "subTheme": "The Legend of Zelda",
                     "previewUrl": null
@@ -1481,7 +1489,6 @@ class ListOfQuestion {
         """
     }
 
-    // et oui c'est toute la logic de l'app qui marche et surtout previewUrl ne sert à rien et oui j'ai la flem de l'enlever
     fun generateQuestions(settings: Setting): List<QuestionBlindTest> {
         val gson = Gson()
         val itemType = object : TypeToken<List<SongData>>() {}.type

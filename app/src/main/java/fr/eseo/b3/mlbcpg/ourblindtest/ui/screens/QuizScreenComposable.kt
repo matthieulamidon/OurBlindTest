@@ -158,10 +158,10 @@ private fun QuizScreenContent(
                     fontWeight = FontWeight.SemiBold
                 )
                 Text(
-                    text = "Question $currentQuestion/$nbOfQuestion",
+                    text = "Question ${currentQuestion+1}/$nbOfQuestion",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold
-                )
+                 )
             }
 
             Spacer(Modifier.height(32.dp))
