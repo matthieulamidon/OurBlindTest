@@ -80,6 +80,7 @@ fun SettingsScreen(onValidate: () -> Unit,
     }
 }
 
+// Contenu principal de l'écran de paramètres
 @Composable
 private fun SettingsScreenContent(
     modifier: Modifier,
@@ -167,7 +168,7 @@ private fun SettingsScreenContent(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    /*
+                    /* Mode aléatoire qui ne fonctionne pas encore
                     FilterChip(
                         selected = subTheme == null,
                         onClick = { subTheme = null },

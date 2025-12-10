@@ -10,8 +10,8 @@ class InGameRepositoryListImpl: InGameRepository {
     private var listOfQuestion = mutableListOf<QuestionBlindTest>()
     private var setting = Setting(
         nb = 5,
-        theme = Theme.JEU_VIDEO,
-        subTheme = SubTheme.HOLLOW_KNIGHT
+        theme = Theme.DESSINS_ANIMES,
+        subTheme = SubTheme.DISNEY
     )
 
     private var pseudo = ""

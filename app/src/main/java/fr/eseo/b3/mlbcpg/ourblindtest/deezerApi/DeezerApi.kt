@@ -23,7 +23,7 @@ object DeezerApi {
         val conn = url.openConnection() as HttpURLConnection
         conn.requestMethod = "GET"
 
-        if (conn.responseCode == 200) {
+        if (conn.responseCode == 200) { // si ok
             val response = conn.inputStream.bufferedReader().readText()
             val json = JSONObject(response)
             val items = json.getJSONArray("data")
