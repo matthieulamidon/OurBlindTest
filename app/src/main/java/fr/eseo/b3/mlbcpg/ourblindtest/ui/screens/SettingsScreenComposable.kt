@@ -51,7 +51,6 @@ import androidx.compose.ui.unit.sp
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
 import fr.eseo.b3.mlbcpg.ourblindtest.model.SubTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Theme
-import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.theme.OurBlindTestTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import kotlinx.coroutines.flow.StateFlow
@@ -226,6 +225,7 @@ fun SectionTitle(title: String) {
     }
 }
 
+/*
 @SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
@@ -239,4 +239,4 @@ fun SettingsScreenPreview() {
             inGameVm = fakeViewModelInGame
         )
     }
-}
+}*/

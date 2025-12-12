@@ -38,6 +38,7 @@ import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import kotlinx.coroutines.delay
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.text.style.TextOverflow
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.DeezerViewModel
 
@@ -271,7 +272,7 @@ fun GameTimer(
     onTimeFinished: () -> Unit
 ) {
     // ... Logique du LaunchedEffect inchangée ...
-    var timeLeft by remember { mutableIntStateOf(totalTime) }
+    var timeLeft by rememberSaveable { mutableIntStateOf(totalTime) }
     val progress = timeLeft / totalTime.toFloat()
     val animatedProgress by animateFloatAsState(targetValue = progress, label = "ProgressAnimation")
 

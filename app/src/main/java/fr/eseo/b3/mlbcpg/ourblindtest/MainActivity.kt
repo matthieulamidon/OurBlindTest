@@ -15,15 +15,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.navigation.AppNavigation
-import androidx.lifecycle.viewmodel.compose.viewModel
-import fr.eseo.b3.mlbcpg.ourblindtest.ListOfQuestion.ListOfQuestion
-import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
-import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepository
-import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
 import fr.eseo.b3.mlbcpg.ourblindtest.ui.theme.OurBlindTestTheme
-import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
-import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModelFactory
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

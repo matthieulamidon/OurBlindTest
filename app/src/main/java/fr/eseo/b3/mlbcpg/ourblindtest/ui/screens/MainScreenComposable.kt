@@ -60,7 +60,6 @@ import fr.eseo.b3.mlbcpg.ourblindtest.R
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
 import fr.eseo.b3.mlbcpg.ourblindtest.model.SubTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepository
-import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoriesRoomImp
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepository
 import fr.eseo.b3.mlbcpg.ourblindtest.repositories.OurBlindTestRepositoryListImpl
@@ -295,7 +294,7 @@ class FakeRepo : OurBlindTestRepository {
     override suspend fun deleteScore(score: Score) {}
     override suspend fun getScoreById(id: Int) = null
 }
-
+/*
 @SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
@@ -316,7 +315,7 @@ fun HomeScreenPreview() {
         )
     }
 }
-
+*/
 
 /*
     @Composable

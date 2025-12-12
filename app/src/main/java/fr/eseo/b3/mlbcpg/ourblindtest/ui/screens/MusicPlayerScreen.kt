@@ -1,5 +1,6 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,21 +35,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import fr.eseo.b3.mlbcpg.ourblindtest.ListOfQuestion.ListOfQuestion
+import fr.eseo.b3.mlbcpg.ourblindtest.R
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.DeezerViewModel
+import java.io.InputStreamReader
 import java.util.concurrent.TimeUnit
 
 private data class SongData(val name: String, val author: String)
 
+@SuppressLint("LocalContextResourcesRead")
 @Composable
 fun MusicPlayerScreen(deezerViewModel: DeezerViewModel) {
     var songName by remember { mutableStateOf("") }
     var authorName by remember { mutableStateOf("") }
     var searchStatus by remember { mutableStateOf("") }
+    val context = LocalContext.current
+
 
     val track by deezerViewModel.track.collectAsState()
     val isPlaying by deezerViewModel.isPlaying.collectAsState()
@@ -136,15 +143,25 @@ fun MusicPlayerScreen(deezerViewModel: DeezerViewModel) {
             Button(
                 onClick = {
                     searchStatus = "Recherche..."
-                    val songsJson = ListOfQuestion.QUESTIONS_JSON_DATA
+                    val inputStream = context.resources.openRawResource(R.raw.songs)
+
                     val gson = Gson()
                     val songListType = object : TypeToken<List<SongData>>() {}.type
-                    val songs: List<SongData> = gson.fromJson(songsJson, songListType)
-                    val randomSong = songs.random()
-                    songName = randomSong.name
-                    authorName = randomSong.author
-                    deezerViewModel.searchTrack(randomSong.name, randomSong.author) { foundTrack ->
-                        searchStatus = if (foundTrack != null) "Preview trouvée !" else "Preview non trouvée."
+
+                    // On peut lire directement le stream avec Gson via un Reader
+                    val reader = InputStreamReader(inputStream)
+                    val songs: List<SongData> = gson.fromJson(reader, songListType) ?: emptyList()
+
+                    if (songs.isNotEmpty()) {
+                        val randomSong = songs.random()
+                        songName = randomSong.name
+                        authorName = randomSong.author
+
+                        deezerViewModel.searchTrack(randomSong.name, randomSong.author) { foundTrack ->
+                            searchStatus = if (foundTrack != null) "Preview trouvée !" else "Non trouvée."
+                        }
+                    } else {
+                        searchStatus = "Liste vide."
                     }
                 },
                 colors = ButtonDefaults.buttonColors(

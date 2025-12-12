@@ -36,7 +36,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Score
-import fr.eseo.b3.mlbcpg.ourblindtest.repositories.InGameRepositoryListImpl
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.InGameViewModel
 import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModel
 
@@ -168,7 +167,7 @@ private fun ResultScreenContent(
         }
     }
 }
-
+/*
 @SuppressLint("ViewModelConstructorInComposable")
 @Preview(showBackground = true)
 @Composable
@@ -178,4 +177,4 @@ fun ResultScreenPreview() {
         ourBlindTestViewModel = OurBlindTestViewModel(FakeRepo()),
         onRestart = {}
     )
-}
+}*/

@@ -1,12 +1,13 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.repositories
 
+import android.content.Context
 import fr.eseo.b3.mlbcpg.ourblindtest.ListOfQuestion.ListOfQuestion
 import fr.eseo.b3.mlbcpg.ourblindtest.model.QuestionBlindTest
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Setting
 import fr.eseo.b3.mlbcpg.ourblindtest.model.SubTheme
 import fr.eseo.b3.mlbcpg.ourblindtest.model.Theme
 
-class InGameRepositoryListImpl: InGameRepository {
+class InGameRepositoryListImpl(private val context: Context): InGameRepository {
     private var listOfQuestion = mutableListOf<QuestionBlindTest>()
     private var setting = Setting(
         nb = 5,
@@ -43,7 +44,7 @@ class InGameRepositoryListImpl: InGameRepository {
                 listOfQuestion.add(testQuestion2)
         */
 
-        val generate = ListOfQuestion().generateQuestions(setting)
+        val generate = ListOfQuestion().generateQuestions( context ,setting)
         listOfQuestion = generate.toMutableList()
         currentQuestion = 0
         score = 0

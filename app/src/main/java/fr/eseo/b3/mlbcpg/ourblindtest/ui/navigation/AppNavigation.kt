@@ -1,6 +1,7 @@
 package fr.eseo.b3.mlbcpg.ourblindtest.ui.navigation
 
 import android.app.Application
+import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -24,11 +25,12 @@ import fr.eseo.b3.mlbcpg.ourblindtest.viewmodels.OurBlindTestViewModelFactory
 fun AppNavigation() {
     val navController = rememberNavController()
     val application = LocalContext.current.applicationContext as Application
+    val ex = LocalContext.current
     val ourBlindTestVM: OurBlindTestViewModel = viewModel(
         factory = OurBlindTestViewModelFactory(OurBlindTestRepositoriesRoomImp(application))
     )
     val inGameVM: InGameViewModel = viewModel(
-        factory = InGameViewModelFactory(InGameRepositoryListImpl())
+        factory = InGameViewModelFactory(InGameRepositoryListImpl(ex))
     )
     val deezerVM: DeezerViewModel = viewModel()
 
